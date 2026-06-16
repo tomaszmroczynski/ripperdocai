@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
-import '../globals.css';
 import { locales, getDict } from '@/lib/i18n';
-import ClientEnhancements from '@/components/ClientEnhancements';
+import LangHtml from '@/components/LangHtml';
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -15,7 +14,6 @@ export async function generateMetadata({
   const { lang } = await params;
   const d = getDict(lang);
   return {
-    metadataBase: new URL('https://ripperdoc.ai'),
     title: 'Ripperdoc — Human First. Intelligence Amplified.',
     description: d['hero.lede'],
     alternates: {
@@ -34,11 +32,9 @@ export default async function LangLayout({
 }) {
   const { lang } = await params;
   return (
-    <html lang={lang}>
-      <body>
-        {children}
-        <ClientEnhancements />
-      </body>
-    </html>
+    <>
+      <LangHtml lang={lang} />
+      {children}
+    </>
   );
 }
