@@ -1,24 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-const locales = ['no', 'en', 'pl'];
-const defaultLocale = 'no';
-
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-  const hasLocale = locales.some(
-    (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`)
-  );
-  if (hasLocale) return;
-
-  const accept = (req.headers.get('accept-language') || '').toLowerCase();
-  const detected = locales.find((l) => accept.includes(l)) || defaultLocale;
-
-  const url = req.nextUrl.clone();
-  url.pathname = `/${detected}${pathname === '/' ? '' : pathname}`;
-  return NextResponse.redirect(url);
+// Locale redirect is handled in next.config.mjs (redirects), not here.
+// This middleware is intentionally inert: the matcher below never matches a
+// real request path, so the Edge function is never invoked.
+export function middleware() {
+  return NextResponse.next();
 }
 
 export const config = {
-  // Skip Next internals and any path containing a dot (static files, bio-scan-3d.html, images)
-  matcher: ['/((?!_next|.*\\..*).*)']
+  matcher: ['/__inert_never_match__']
 };

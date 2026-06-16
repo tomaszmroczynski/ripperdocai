@@ -10,29 +10,31 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
-  const d = getDict(params.lang);
+  const { lang } = await params;
+  const d = getDict(lang);
   return {
     metadataBase: new URL('https://ripperdoc.ai'),
     title: 'Ripperdoc — Human First. Intelligence Amplified.',
     description: d['hero.lede'],
     alternates: {
-      canonical: '/' + params.lang,
+      canonical: '/' + lang,
       languages: { no: '/no', en: '/en', pl: '/pl' }
     }
   };
 }
 
-export default function LangLayout({
+export default async function LangLayout({
   children,
   params
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
+  const { lang } = await params;
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <body>
         {children}
         <ClientEnhancements />

@@ -33,8 +33,8 @@ const scanSvg = `
   <rect class="scan-sweep" x="48" y="20" width="224" height="22" fill="url(#scanline)"/>
 </svg>`;
 
-export default function Page({ params }: { params: { lang: string } }) {
-  const lang = params.lang;
+export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
   const d = getDict(lang);
   const t = (k: string) => d[k] ?? '';
   const html = (k: string) => ({ __html: d[k] ?? '' });
