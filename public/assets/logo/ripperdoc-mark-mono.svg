@@ -1,0 +1,9 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ripperdoc">
+  <path d="M29 47.39 A 12 12 0 0 0 31.34 28.37" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none" opacity="0.5"></path>
+  <path d="M32.5 53.45 A 19 19 0 0 0 36.2 23.33" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" fill="none" opacity="0.75"></path>
+  <path d="M35.5 58.65 A 25 25 0 0 0 40.37 19.02" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="1"></path>
+  <circle cx="31.34" cy="28.37" r="2.0" fill="currentColor"></circle>
+  <circle cx="36.2" cy="23.33" r="2.0" fill="currentColor"></circle>
+  <circle cx="40.37" cy="19.02" r="2.0" fill="currentColor"></circle>
+  <circle cx="23" cy="37" r="5" fill="currentColor"></circle>
+</svg>

@@ -14,3 +14,5 @@ Thumbs.db
 *.log
 # redundant source export (large PNG; hero.jpg is the used asset)
 mock/assets/img/hero.jpg.png
+next-env.d.ts
+*.tsbuildinfo
