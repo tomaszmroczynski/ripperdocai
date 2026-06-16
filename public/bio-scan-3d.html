@@ -327,4 +327,114 @@ window.HUMAN_HEIGHT=1.70;
     const teleMeshes=[];
     TELE.forEach(n=>{const p=nearest(...n.t), col=n.hot?SPARK:new THREE.Color(0xF6D29A);
       const m=new THREE.Mesh(new THREE.SphereGeometry(n.hot?0.026:0.018,16,16),
-        new THREE.MeshBasicMaterial({color:col,transparent:true,blending:THREE.AdditiveBlendin
+        new THREE.MeshBasicMaterial({color:col,transparent:true,blending:THREE.AdditiveBlending}));
+      m.position.set(p[0],p[1],p[2]); figure.add(m);
+      const halo=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,color:col,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+      halo.scale.set(0.11,0.11,1); halo.position.copy(m.position); figure.add(halo);
+      const line=document.createElementNS(SVGNS,'line'), dot=document.createElementNS(SVGNS,'circle');
+      dot.setAttribute('r','2.4'); if(n.hot)dot.setAttribute('fill','#FFD9A0'); leads.appendChild(line); leads.appendChild(dot);
+      const hit=new THREE.Mesh(new THREE.SphereGeometry(0.10,8,8),new THREE.MeshBasicMaterial({visible:false}));
+      hit.position.copy(m.position); hit.userData.idx=teleMeshes.length; figure.add(hit);
+      teleMeshes.push({m,halo,line,dot,hit,hot:n.hot,row:document.getElementById(n.row)});
+    });
+
+    function sizeLeads(){leads.setAttribute('width',innerWidth);leads.setAttribute('height',innerHeight);}
+    sizeLeads();
+    addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth,innerHeight);sizeLeads();
+      uniforms.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5;});
+
+    // ---- hover interaction: mouse (desktop) + controller ray (VR) ----
+    const ray=new THREE.Raycaster(), pointer=new THREE.Vector2(-2,-2), cMat=new THREE.Matrix4();
+    addEventListener('pointermove',e=>{pointer.x=(e.clientX/innerWidth)*2-1;pointer.y=-(e.clientY/innerHeight)*2+1;});
+    const controllers=[renderer.xr.getController(0),renderer.xr.getController(1)];
+    controllers.forEach(c=>{scene.add(c);
+      const lg=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0),new THREE.Vector3(0,0,-3)]);
+      c.add(new THREE.Line(lg,new THREE.LineBasicMaterial({color:0xEA9A3E,transparent:true,opacity:0.4})));});
+    const hitMeshes=teleMeshes.map(n=>n.hit);
+    figure.updateMatrixWorld(true);
+    function detectHover(){let found=-1;
+      if(renderer.xr.isPresenting){
+        for(const c of controllers){cMat.identity().extractRotation(c.matrixWorld);
+          ray.ray.origin.setFromMatrixPosition(c.matrixWorld);
+          ray.ray.direction.set(0,0,-1).applyMatrix4(cMat).normalize();
+          const h=ray.intersectObjects(hitMeshes,false); if(h.length){found=h[0].object.userData.idx;break;}}
+      } else { ray.setFromCamera(pointer,camera);
+        const h=ray.intersectObjects(hitMeshes,false); if(h.length)found=h[0].object.userData.idx; }
+      return found;}
+    function highlightRow(idx){teleMeshes.forEach((n,i)=>n.row.classList.toggle('active',i===idx));}
+    let hoverIdx=-1, hoverStart=0;
+
+    const tmp=new THREE.Vector3();
+    function updateLeads(){const inXR=renderer.xr.isPresenting;
+      teleMeshes.forEach(n=>{
+        if(inXR){n.line.style.display='none';n.dot.style.display='none';return;}
+        tmp.copy(n.m.position).project(camera);
+        const sx=(tmp.x*0.5+0.5)*innerWidth, sy=(-tmp.y*0.5+0.5)*innerHeight;
+        const r=n.row.getBoundingClientRect(), ax=r.right, ay=r.top+r.height/2;
+        if(tmp.z>1){n.line.style.display='none';n.dot.style.display='none';return;}
+        n.line.style.display='';n.dot.style.display='';
+        n.line.setAttribute('x1',sx);n.line.setAttribute('y1',sy);
+        n.line.setAttribute('x2',ax);n.line.setAttribute('y2',ay);
+        n.dot.setAttribute('cx',sx);n.dot.setAttribute('cy',sy);
+      });
+    }
+
+    const clock=new THREE.Clock();
+    const SCAN_T=6.5;
+    let forceScanStart=-99;
+
+    // ---- SYNC with RipperMCP (same endpoint + payload shape as HealthRepository.saveQuestRealTimeData) ----
+    const MCP_BASE='https://ripper-mcp.complet-ai.no';
+    const syncBtn=document.getElementById('syncBtn'), syncTxt=document.getElementById('syncTxt'), syncDot=document.getElementById('syncDot');
+    const fmtNow=()=>{const d=new Date();return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');};
+    let syncState='connecting', syncTime='';
+    function renderSync(){ const d=window.bsT();
+      if(syncState==='sending') syncTxt.textContent=d.sync_sending;
+      else if(syncState==='synced') syncTxt.textContent=d.sync_synced+syncTime;
+      else if(syncState==='offline') syncTxt.textContent=d.sync_offline;
+      else if(syncState==='ready') syncTxt.textContent=d.sync_ready;
+      else syncTxt.textContent=d.sync_connecting;
+    }
+    window.addEventListener('rd-lang', renderSync); renderSync();
+    async function doSync(){
+      forceScanStart=clock.getElapsedTime();
+      syncBtn.disabled=true; syncDot.className='dot busy'; syncState='sending'; renderSync();
+      const ts=Date.now();
+      const payloads=[
+        {source:'quest',type:'real-time-activity',data:{activityName:'Beat Saber',packageName:'com.beatgames.beatsaber',durationMinutes:28,caloriesBurned:412,timestamp:ts,isHeadsetWorn:true}},
+        {source:'oura',type:'daily',data:{readiness_score:84,sleepDurationHours:7.4,timestamp:ts}},
+        {source:'withings',type:'measure',data:{weight_kg:78.4,timestamp:ts}},
+        {source:'samsung_health',type:'daily',data:{stepCount:8240,timestamp:ts}}
+      ];
+      try{
+        for(const p of payloads){
+          await fetch(MCP_BASE+'/sync/health-connect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});
+        }
+        syncDot.className='dot ok'; syncState='synced'; syncTime=fmtNow(); renderSync();
+      }catch(e){ syncDot.className='dot err'; syncState='offline'; renderSync(); }
+      finally{ syncBtn.disabled=false; }
+    }
+    syncBtn.addEventListener('click',doSync);
+    fetch(MCP_BASE+'/status').then(r=>r.ok?r.json():Promise.reject()).then(()=>{syncDot.className='dot ok';syncState='ready';renderSync();}).catch(()=>{syncDot.className='dot err';syncState='offline';renderSync();});
+
+    renderer.setAnimationLoop(()=>{const t=clock.getElapsedTime();
+      eMat.opacity=0.14+0.07*Math.sin(t*0.8);
+      const h=detectHover();
+      if(h!==hoverIdx){hoverIdx=h; if(h>=0)hoverStart=t; highlightRow(h);}
+      const forcing=(t-forceScanStart)<SCAN_T, active=forcing||hoverIdx>=0;
+      if(active){
+        const ref=forcing?forceScanStart:hoverStart;
+        const sp=((t-ref)%SCAN_T)/SCAN_T, scanY=1.74-sp*1.78, fade=Math.min(1,Math.min(sp,1-sp)*7);
+        uniforms.uScanY.value=scanY; scanRing.position.y=scanY; scanBand.position.y=scanY;
+        scanRing.material.opacity=(forcing?0.85:0.6)*fade; scanBand.material.opacity=0.05*fade;
+      } else { uniforms.uScanY.value=-10.0;
+        scanRing.material.opacity*=0.85; scanBand.material.opacity*=0.85; }
+      teleMeshes.forEach((n,i)=>{const foc=(i===hoverIdx)?1.7:1.0;
+        const s=foc*(1+(n.hot?0.35:0.18)*Math.sin(t*1.8+i));
+        n.m.scale.setScalar(s); n.halo.scale.setScalar((n.hot?0.15:0.11)*foc*(0.9+0.25*Math.sin(t*1.8+i)));});
+      controls.update(); updateLeads(); renderer.render(scene,camera);
+    });
+  </script>
+</body>
+</html>
