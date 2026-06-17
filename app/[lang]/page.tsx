@@ -208,10 +208,11 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
             <h2 className="sec-title" style={{ fontSize: 40 }}>
               {t('work.title')}
             </h2>
-            <p className="sec-sub">{t('work.body')}</p>
-            <p className="sec-sub" style={{ fontSize: 15, marginTop: 16, color: 'var(--text-faint)' }}>
-              {t('work.note')}
-            </p>
+            {t('work.body').split('\n\n').map((p, i) => (
+              <p key={i} className="sec-sub" style={i ? { marginTop: 14 } : undefined}>
+                {p}
+              </p>
+            ))}
             <div className="chips">
               <span className="chip">
                 <i data-lucide="scan-eye" /> <span>{t('work.chip1')}</span>

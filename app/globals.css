@@ -605,7 +605,9 @@ a.scan-preview { text-decoration: none; }
 .rs-back { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
 .rs-back:hover { color: var(--text-strong); }
 .rs-title { font-size: 44px; line-height: 1.08; letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 26px; }
+.rs-lede { font-size: 22px; line-height: 1.5; color: var(--paper-50); margin: 0 0 22px; letter-spacing: -0.01em; }
 .rs-lead { font-size: 17px; line-height: 1.7; color: var(--text-muted); margin-bottom: 18px; }
+.rs-section { margin-top: 8px; }
 .rs-h2 { font-size: 26px; letter-spacing: -0.02em; color: var(--text-strong); margin: 44px 0 18px; }
 .rs-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; }
 .rs-steps li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.6; color: var(--text-muted); }
