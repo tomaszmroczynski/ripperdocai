@@ -16,3 +16,6 @@ Thumbs.db
 mock/assets/img/hero.jpg.png
 next-env.d.ts
 *.tsbuildinfo
+# design-system reference (not part of the deployed app)
+Ripperdoc Design System/
+mock/
