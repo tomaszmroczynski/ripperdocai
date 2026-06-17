@@ -1,5 +1,4 @@
 import { getDict, locales } from '@/lib/i18n';
-import LangSwitcher from '@/components/LangSwitcher';
 import RevolutionStatement from '@/components/RevolutionStatement';
 
 const REV: Record<string, { eyebrow: string; lines: string[] }> = {
@@ -81,27 +80,6 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
 
   return (
     <>
-      <nav className="nav">
-        <div className="wrap nav-in">
-          <div className="brand">
-            <img src="/assets/logo/ripperdoc-mark.svg" alt="" />
-            <span className="name">
-              Ripper<span className="doc">doc</span>
-            </span>
-          </div>
-          <div className="nav-links">
-            <a href="#manifest">{t('nav.manifest')}</a>
-            <a href="#services">{t('nav.services')}</a>
-            <a href="#work">{t('nav.work')}</a>
-            <a href="#contact">{t('nav.contact')}</a>
-            <a className="btn btn-ghost" href="#contact">
-              {t('nav.cta')}
-            </a>
-            <LangSwitcher current={lang} />
-          </div>
-        </div>
-      </nav>
-
       <header className="hero">
         <div className="hero-bg">
           <img src="/assets/img/hero.jpg" alt="" />
