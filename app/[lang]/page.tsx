@@ -11,7 +11,8 @@ const REV: Record<string, { eyebrow: string; lines: string[] }> = {
       'Den høyeste frykten: å bli erstattet.',
       'Mitt svar er et annet: ikke erstatning, men forsterkning.',
       'Jeg setter mennesket først.',
-      'Det er tryggheten jeg gir — å komme styrket gjennom endringen.'
+      'Det er tryggheten jeg gir — å komme styrket gjennom endringen.',
+      'Jeg utvider menneskelig kapasitet.'
     ]
   },
   en: {
@@ -22,7 +23,8 @@ const REV: Record<string, { eyebrow: string; lines: string[] }> = {
       'The loudest fear: being replaced.',
       'My answer is different: not replacement, but amplification.',
       'I put the human first.',
-      'That is the security I give — to come through this change stronger.'
+      'That is the security I give — to come through this change stronger.',
+      'I expand human capability.'
     ]
   },
   pl: {
@@ -33,7 +35,8 @@ const REV: Record<string, { eyebrow: string; lines: string[] }> = {
       'Najgłośniejszy lęk: zostać zastąpionym.',
       'Moja odpowiedź jest inna: nie zastąpienie, lecz wzmocnienie.',
       'Stawiam człowieka na pierwszym miejscu.',
-      'To jest bezpieczeństwo, które daję — wyjść z tej zmiany silniejszym.'
+      'To jest bezpieczeństwo, które daję — wyjść z tej zmiany silniejszym.',
+      'Rozszerzam ludzkie możliwości.'
     ]
   }
 };
@@ -109,8 +112,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
             <span className="pip" />
             <span>{t('hero.eyebrow')}</span>
           </div>
-          <h1 dangerouslySetInnerHTML={html('hero.h1')} />
-          <p className="lede">{t('hero.lede')}</p>
+          <RevolutionStatement lines={(REV[lang] ?? REV.en).lines} />
           <div className="hero-cta">
             <a className="btn btn-primary" href={`/${lang}/diagnostic`}>
               <i data-lucide="zap" /> <span>{t('hero.cta1')}</span>
@@ -128,14 +130,6 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           </div>
         </div>
       </header>
-
-      <section className="block rev" id="revolution">
-        <canvas data-neural-field data-sparks="2" data-density="0.00006" data-speed="0.08" />
-        <div className="wrap">
-          <div className="rev-eyebrow">{(REV[lang] ?? REV.en).eyebrow}</div>
-          <RevolutionStatement lines={(REV[lang] ?? REV.en).lines} />
-        </div>
-      </section>
 
       <section className="block" id="manifest">
         <div className="wrap manifesto">

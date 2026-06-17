@@ -36,12 +36,8 @@ export default function RevolutionStatement({ lines }: { lines: string[] }) {
 
   if (reduced) {
     return (
-      <div className="rev-static">
-        {lines.map((l, k) => (
-          <p key={k} className="rev-line-static">
-            {l}
-          </p>
-        ))}
+      <div className="rev-stage">
+        <p className="rev-line rev-in">{lines[lines.length - 1]}</p>
       </div>
     );
   }

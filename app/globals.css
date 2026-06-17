@@ -587,3 +587,9 @@ a.scan-preview { text-decoration: none; }
   .rev-line-static { font-size: 19px; }
   .rev-stage { min-height: 120px; }
 }
+
+/* Animated statement used as the hero headline (replaces the static h1) */
+.hero-in .rev-stage { min-height: 220px; justify-content: flex-start; text-align: left; margin: 0 0 30px; }
+.hero-in .rev-line { font-size: 72px; line-height: 1.04; letter-spacing: -0.035em; color: var(--paper-50); text-align: left; max-width: 900px; margin: 0; }
+@media (max-width: 880px) { .hero-in .rev-line { font-size: 46px; } .hero-in .rev-stage { min-height: 168px; } }
+@media (max-width: 560px) { .hero-in .rev-line { font-size: 32px; } .hero-in .rev-stage { min-height: 150px; } }
