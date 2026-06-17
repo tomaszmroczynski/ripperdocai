@@ -518,8 +518,7 @@ code, kbd, samp, pre {
     .eyebrow { margin-bottom: 16px; font-size: 11px; padding: 6px 12px; letter-spacing: 0.16em; }
     h1 { font-size: 34px; line-height: 1.1; margin-bottom: 16px; }
     .lede { font-size: 15.5px; line-height: 1.5; margin-bottom: 24px; }
-    .hero-cta { gap: 10px; width: 100%; }
-    .hero-cta .btn { width: 100%; justify-content: center; }
+    .hero-cta { display: none; }
     .lockup { margin-top: 30px; font-size: 12px; letter-spacing: 0.16em; gap: 9px; flex-wrap: wrap; }
     section.block { padding: 60px 0; }
     .sec-eyebrow { font-size: 11px; }

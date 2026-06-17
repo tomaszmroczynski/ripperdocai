@@ -115,10 +115,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           <RevolutionStatement lines={(REV[lang] ?? REV.en).lines} />
           <div className="hero-cta">
             <a className="btn btn-primary" href={`/${lang}/diagnostic`}>
-              <i data-lucide="zap" /> <span>{t('hero.cta1')}</span>
-            </a>
-            <a className="btn btn-ghost" href="#manifest">
-              <span>{t('hero.cta2')}</span> <i data-lucide="arrow-right" />
+              <i data-lucide="scan-eye" /> <span>{t('hero.cta1')}</span>
             </a>
           </div>
           <div className="lockup">
