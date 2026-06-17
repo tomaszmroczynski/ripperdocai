@@ -107,9 +107,9 @@
   }
   /* --- Phones: compact panels, capped height, figure occupies the centre column --- */
   @media (max-width: 560px){
-    .panel{width:min(46vw,200px);padding:12px;max-height:31vh;overflow:auto;-webkit-overflow-scrolling:touch}
-    .panel.left{left:12px;top:54px;bottom:auto;transform:none}
-    .panel.right{right:12px;bottom:108px;top:auto;left:auto;transform:none}
+    .panel{width:min(43vw,185px);padding:11px;max-height:64vh;overflow:auto;-webkit-overflow-scrolling:touch;background:rgba(7,9,12,.42)}
+    .panel.left{left:6px;top:50%;bottom:auto;transform:translateY(-50%)}
+    .panel.right{right:6px;left:auto;bottom:auto;top:50%;transform:translateY(-50%)}
     .hud{top:16px;left:16px}
     .hud h1{font-size:17px}
     .hud p{font-size:12px}
@@ -193,7 +193,7 @@ window.HUMAN_HEIGHT=1.70;
         vr_last:"Siste VR-økt", vr_hr:"puls 148", sync_btn:"Synkroniser med RipperMCP",
         sync_connecting:"RipperMCP: kobler til…", sync_sending:"Sender til RipperMCP…",
         sync_synced:"RipperMCP: synket ", sync_offline:"RipperMCP: frakoblet", sync_ready:"RipperMCP: klar",
-        help:"Desktop: <b>dra</b> for å rotere · <b>scroll</b> for zoom &nbsp;·&nbsp; Quest: <b>Enter VR</b> og gå rundt figuren" },
+        help:"Desktop: <b>dra</b> for å rotere · <b>scroll</b> for zoom &nbsp;·&nbsp; <b>dobbeltklikk</b> et panel for å forstørre &nbsp;·&nbsp; Quest: <b>Enter VR</b>" },
       en:{ hud_h1:"Your body, mapped", hud_sub:"Scale 1:1 · walk around", tele:"Telemetry · 7 days",
         k_puls:"Resting heart rate", k_masa:"Weight · Withings", k_kroki:"Steps · Samsung",
         coach_p1:"Your resting heart rate has dropped <b>three days running</b>, and recovery is climbing. Your body is ready for more than you're giving it today.",
@@ -201,7 +201,7 @@ window.HUMAN_HEIGHT=1.70;
         vr_last:"Last VR session", vr_hr:"heart rate 148", sync_btn:"Sync with RipperMCP",
         sync_connecting:"RipperMCP: connecting…", sync_sending:"Sending to RipperMCP…",
         sync_synced:"RipperMCP: synced ", sync_offline:"RipperMCP: offline", sync_ready:"RipperMCP: ready",
-        help:"Desktop: <b>drag</b> to rotate · <b>scroll</b> to zoom &nbsp;·&nbsp; Quest: <b>Enter VR</b> and walk around the figure" },
+        help:"Desktop: <b>drag</b> to rotate · <b>scroll</b> to zoom &nbsp;·&nbsp; <b>double-click</b> a panel to enlarge &nbsp;·&nbsp; Quest: <b>Enter VR</b>" },
       pl:{ hud_h1:"Twój organizm, zmapowany", hud_sub:"Skala 1:1 · obejdź dookoła", tele:"Telemetria · 7 dni",
         k_puls:"Puls spoczynkowy", k_masa:"Masa · Withings", k_kroki:"Kroki · Samsung",
         coach_p1:"Twoje tętno spoczynkowe spada <b>trzeci dzień z rzędu</b>, a regeneracja rośnie. Ciało jest gotowe na więcej, niż dajesz mu dziś.",
@@ -209,7 +209,7 @@ window.HUMAN_HEIGHT=1.70;
         vr_last:"Ostatnia sesja VR", vr_hr:"tętno 148", sync_btn:"Synchronizuj z RipperMCP",
         sync_connecting:"RipperMCP: łączenie…", sync_sending:"Wysyłanie do RipperMCP…",
         sync_synced:"RipperMCP: zsync. ", sync_offline:"RipperMCP: offline", sync_ready:"RipperMCP: gotowy",
-        help:"Desktop: <b>przeciągnij</b> aby obrócić · <b>scroll</b> zoom &nbsp;·&nbsp; Quest: <b>Enter VR</b> i obejdź figurę" }
+        help:"Desktop: <b>przeciągnij</b> aby obrócić · <b>scroll</b> zoom &nbsp;·&nbsp; <b>dwuklik</b> panelu = powiększ &nbsp;·&nbsp; Quest: <b>Enter VR</b>" }
     };
     var valid=['no','en','pl'];
     var urlLang=new URLSearchParams(location.search).get('lang');
@@ -246,6 +246,7 @@ window.HUMAN_HEIGHT=1.70;
       }
       panel.addEventListener('pointerdown', function (e) {
         if (e.button) return;
+        if (window.matchMedia('(max-width: 560px)').matches) return; // no drag on phones
         if (panel.classList.contains('expanded')) return;
         if (e.target.closest('button, a, input, textarea, .cta')) return;
         var r = panel.getBoundingClientRect();
