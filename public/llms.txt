@@ -1,0 +1,34 @@
+# Ripperdoc
+
+> Human First. Intelligence Amplified. Ripperdoc designs digital augmentations — AI, intelligent systems and automation — that expand what a person, team or organization can do. Technology is the augmentation; the human stays the hero.
+
+Ripperdoc is a brand and practice focused on empowerment, not replacement. The name comes from the Cyberpunk universe, where a "ripperdoc" enhanced people beyond their biological limits. Today that role is played by specialists in AI, automation and knowledge systems: tools that let one person do work that once required a whole team — without losing control or judgment.
+
+The website is trilingual: Norwegian (default), English and Polish.
+
+## Site
+
+- [Norsk / Norwegian](https://ripperdoc.ai/no)
+- [English](https://ripperdoc.ai/en)
+- [Polski / Polish](https://ripperdoc.ai/pl)
+
+## What Ripperdoc does
+
+- Intelligence: AI agents and decision support that help people analyze more information faster, without giving up control.
+- Software: connected systems and automations that remember, coordinate and execute — turning intent into action.
+- Infrastructure: tools and environments that bring AI into real work, reliably, privately and at scale.
+
+## Project: RipperSync (concept in progress)
+
+RipperSync is a concept being developed: it combines VR sessions from Meta Quest 3 with health data into one clear picture, analyzed by a private AI trainer. Because health data is sensitive, it runs self-hosted on the user's own NAS or VPS, under their control. Example integrations: Oura and Withings via Health Connect. A voice agent (ElevenLabs) is planned for later versions. Stack: Kotlin, Jetpack Compose, MCP, Meta Quest 3. There is an interactive 3D "bio-scan" demo on the site.
+
+## Principles
+
+- Empowerment, not replacement. The person stays at the centre.
+- Concrete, earned results — not vanity metrics.
+- Privacy and self-hosting for sensitive data.
+
+## Contact
+
+- Website: https://ripperdoc.ai
+- To work together: book a diagnostic session via the site.
