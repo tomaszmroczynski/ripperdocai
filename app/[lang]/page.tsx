@@ -6,37 +6,37 @@ const REV: Record<string, { eyebrow: string; lines: string[] }> = {
   no: {
     eyebrow: 'Revolusjonen',
     lines: [
-      'Det andre tiåret av det 21. århundret er et vendepunkt.',
-      'En revolusjon pågår.',
-      'Den høyeste frykten: å bli erstattet.',
-      'Mitt svar er et annet: ikke erstatning, men forsterkning.',
-      'Jeg setter mennesket først.',
-      'Det er tryggheten jeg gir — å komme styrket gjennom endringen.',
-      'Jeg utvider menneskelig kapasitet.'
+      'Det andre tiåret av det 21. århundret er et <em>vendepunkt</em>.',
+      'En <em>revolusjon</em> pågår.',
+      'Den høyeste frykten: å bli <em>erstattet</em>.',
+      'Mitt svar er et annet: ikke erstatning, men <em>forsterkning</em>.',
+      'Jeg setter <em>mennesket</em> først.',
+      'Det er <em>tryggheten</em> jeg gir — å komme styrket gjennom endringen.',
+      'Jeg utvider menneskelig <em>kapasitet</em>.'
     ]
   },
   en: {
     eyebrow: 'The revolution',
     lines: [
-      'The second decade of the 21st century is a turning point.',
-      'A revolution is underway.',
-      'The loudest fear: being replaced.',
-      'My answer is different: not replacement, but amplification.',
-      'I put the human first.',
-      'That is the security I give — to come through this change stronger.',
-      'I expand human capability.'
+      'The second decade of the 21st century is a <em>turning point</em>.',
+      'A <em>revolution</em> is underway.',
+      'The loudest fear: <em>being replaced</em>.',
+      'My answer is different: not replacement, but <em>amplification</em>.',
+      'I put the <em>human</em> first.',
+      'That is the <em>security</em> I give — to come through this change stronger.',
+      'I expand human <em>capability</em>.'
     ]
   },
   pl: {
     eyebrow: 'Rewolucja',
     lines: [
-      'Druga dekada XXI wieku to punkt zwrotny.',
-      'Trwa rewolucja.',
-      'Najgłośniejszy lęk: zostać zastąpionym.',
-      'Moja odpowiedź jest inna: nie zastąpienie, lecz wzmocnienie.',
-      'Stawiam człowieka na pierwszym miejscu.',
-      'To jest bezpieczeństwo, które daję — wyjść z tej zmiany silniejszym.',
-      'Rozszerzam ludzkie możliwości.'
+      'Druga dekada XXI wieku to <em>punkt zwrotny</em>.',
+      'Trwa <em>rewolucja</em>.',
+      'Najgłośniejszy lęk: zostać <em>zastąpionym</em>.',
+      'Moja odpowiedź jest inna: nie zastąpienie, lecz <em>wzmocnienie</em>.',
+      'Stawiam <em>człowieka</em> na pierwszym miejscu.',
+      'To jest <em>bezpieczeństwo</em>, które daję — wyjść z tej zmiany silniejszym.',
+      'Rozszerzam ludzkie <em>możliwości</em>.'
     ]
   }
 };

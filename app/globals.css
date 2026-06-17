@@ -590,5 +590,6 @@ a.scan-preview { text-decoration: none; }
 /* Animated statement used as the hero headline (matches the previous h1 styling) */
 .hero-in .rev-stage { min-height: 200px; justify-content: flex-start; text-align: left; margin: 0 0 26px; }
 .hero-in .rev-line { font-size: 76px; line-height: 1.03; letter-spacing: -0.035em; font-weight: 600; color: var(--paper-50); text-align: left; margin: 0; }
+.hero-in .rev-line em { font-style: normal; background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (max-width: 880px) { .hero-in .rev-line { font-size: 48px; } .hero-in .rev-stage { min-height: 150px; } }
 @media (max-width: 560px) { .hero-in .rev-line { font-size: 34px; line-height: 1.1; } .hero-in .rev-stage { min-height: 132px; } }

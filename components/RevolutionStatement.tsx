@@ -37,14 +37,20 @@ export default function RevolutionStatement({ lines }: { lines: string[] }) {
   if (reduced) {
     return (
       <div className="rev-stage">
-        <p className="rev-line rev-in">{lines[lines.length - 1]}</p>
+        <p
+          className="rev-line rev-in"
+          dangerouslySetInnerHTML={{ __html: lines[lines.length - 1] }}
+        />
       </div>
     );
   }
 
   return (
     <div className="rev-stage" aria-live="polite">
-      <p className={`rev-line ${shown ? 'rev-in' : 'rev-out'}`}>{lines[index]}</p>
+      <p
+        className={`rev-line ${shown ? 'rev-in' : 'rev-out'}`}
+        dangerouslySetInnerHTML={{ __html: lines[index] }}
+      />
     </div>
   );
 }

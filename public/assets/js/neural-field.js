@@ -35,7 +35,7 @@
     }
 
     function seed() {
-      const count = Math.max(14, Math.round(w * h * density));
+      const count = Math.max(30, Math.round(w * h * density));
       nodes = [];
       for (let i = 0; i < count; i++) {
         nodes.push({
