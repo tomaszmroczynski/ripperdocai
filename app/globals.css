@@ -496,10 +496,42 @@ code, kbd, samp, pre {
   i[data-lucide] { width: 1em; height: 1em; }
 
   @media (max-width: 880px) {
-    h1 { font-size: 52px; }
+    .hero { min-height: 620px; }
+    .hero-in { padding: 76px 0 60px; max-width: 640px; }
+    h1 { font-size: 48px; }
+    .lede { font-size: 19px; margin-bottom: 30px; }
+    .lockup { margin-top: 44px; }
     .manifesto, .atlas { grid-template-columns: 1fr; gap: 40px; }
     .pillars, .stats { grid-template-columns: 1fr; }
-    .nav-links a { display: none; }
+    /* hide section links + CTA button, keep the language switcher (.lang is nested) */
+    .nav-links > a { display: none; }
+    section.block { padding: 84px 0; }
+    .sec-title { font-size: 38px; }
+    .cta h2 { font-size: 40px; }
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    .nav-in { height: 58px; }
+    .hero { min-height: 520px; }
+    .hero-in { padding: 52px 0 44px; }
+    .eyebrow { margin-bottom: 16px; font-size: 11px; padding: 6px 12px; letter-spacing: 0.16em; }
+    h1 { font-size: 34px; line-height: 1.1; margin-bottom: 16px; }
+    .lede { font-size: 15.5px; line-height: 1.5; margin-bottom: 24px; }
+    .hero-cta { gap: 10px; width: 100%; }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    .lockup { margin-top: 30px; font-size: 12px; letter-spacing: 0.16em; gap: 9px; flex-wrap: wrap; }
+    section.block { padding: 60px 0; }
+    .sec-eyebrow { font-size: 11px; }
+    .sec-title { font-size: 28px; }
+    .sec-sub { font-size: 15.5px; }
+    .quote { font-size: 23px; }
+    .stat { padding: 24px; }
+    .stat .v { font-size: 36px; }
+    .cta { padding: 52px 20px; }
+    .cta h2 { font-size: 28px; }
+    .cta p { font-size: 15.5px; }
+    .brand .name { font-size: 17px; }
   }
 
 /* ---- Next.js adaptation: nav buttons rendered as links ---- */
