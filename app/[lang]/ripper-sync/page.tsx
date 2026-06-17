@@ -19,9 +19,8 @@ type RS = {
 const UI: Record<string, RS> = {
   no: {
     eyebrow: 'Konsept under arbeid — RipperSync',
-    title: 'Kroppen er det første laget av intelligens.',
+    title: 'Du kan ikke forsterke sinnet mens du ignorerer kroppen.',
     intro: [
-      'Du kan ikke forsterke sinnet mens du ignorerer kroppen.',
       'Trening påvirker sirkulasjon, konsentrasjon, søvn, stress og evnen til å lære. Det er ikke bare fysisk innsats. Det er et signal om hvordan et menneske fungerer, restituerer og gjenvinner handlekraft.',
       'RipperSync samler signaler fra enhetene som allerede måler kroppen din: sportsklokker, armbånd, ringer, smarte vekter, blodtrykksmålere, søvnsensorer, treningsapper, cardio-utstyr, sykler, VR-plattformer og data fra Health Connect. En privat KI-coach organiserer så denne informasjonen, bearbeider den og gjør den om til en trend du faktisk kan bruke: handlekraft for belastning, behovet for restitusjon, og hvordan innsats påvirker oppmerksomhet, energi og beslutninger.',
       'Du kan snakke med coachen: om uken som gikk, en treningsplan, et fall i energi, restitusjon, eller hva som er verdt å gjøre i dag. Coachen husker historikken din, oppdager mønstre, motiverer og holder rytmen. Den trener ikke for deg. Beslutningen blir hos mennesket.',
@@ -60,9 +59,8 @@ const UI: Record<string, RS> = {
   },
   en: {
     eyebrow: 'Concept in progress — RipperSync',
-    title: 'The body is the first layer of intelligence.',
+    title: 'You can’t amplify the mind while ignoring the body.',
     intro: [
-      'You can’t amplify the mind while ignoring the body.',
       'Training affects circulation, focus, sleep, stress and the ability to learn. It isn’t just physical effort. It’s a signal of how a person performs, recovers and regains readiness.',
       'RipperSync collects signals from the devices that already measure your body: sports watches, bands, rings, smart scales, blood-pressure monitors, sleep sensors, training apps, cardio equipment, bikes, VR platforms and data from Health Connect. A private AI coach then organizes that information, processes it and turns it into a trend you can actually use: readiness for load, the need to recover, and how effort affects attention, energy and decisions.',
       'You can talk to the coach: about the past week, a training plan, a drop in energy, recovery, or what’s worth doing today. The coach remembers your history, spots patterns, motivates and keeps the rhythm. It doesn’t train for you. The decision stays with the person.',
@@ -101,9 +99,8 @@ const UI: Record<string, RS> = {
   },
   pl: {
     eyebrow: 'Koncepcja w toku — RipperSync',
-    title: 'Ciało jest pierwszą warstwą inteligencji.',
+    title: 'Nie da się wzmacniać umysłu, ignorując ciało.',
     intro: [
-      'Nie da się wzmacniać umysłu, ignorując ciało.',
       'Trening wpływa na krążenie, koncentrację, sen, stres i zdolność uczenia się. To nie jest tylko wysiłek fizyczny. To sygnał o tym, jak człowiek działa, regeneruje się i odzyskuje gotowość.',
       'RipperSync zbiera sygnały z urządzeń, które już mierzą ciało: zegarków sportowych, opasek, pierścieni, wag smart, ciśnieniomierzy, sensorów snu, aplikacji treningowych, sprzętu cardio, rowerów, platform VR i danych z Health Connect. Następnie prywatny AI coach porządkuje te informacje, przetwarza je i zamienia w trend, który człowiek może realnie wykorzystać: gotowość do obciążenia, potrzebę regeneracji oraz wpływ wysiłku na uwagę, energię i decyzje.',
       'Z coachem można rozmawiać: o ostatnim tygodniu, planie treningowym, spadku energii, regeneracji albo tym, co dziś warto zrobić. Coach pamięta historię, wykrywa zależności, motywuje i pilnuje rytmu. Nie ćwiczy za ciebie. Decyzja zostaje przy człowieku.',
