@@ -341,11 +341,18 @@ window.HUMAN_HEIGHT=1.70;
       uTex:{value:tex}, uSize:{value:0.013},
       uScale:{value:innerHeight*Math.min(devicePixelRatio,2)*0.5},
       uScanY:{value:-1.0},
+      uMouse:{value:new THREE.Vector2(-2,-2)}, uPushR:{value:0.17}, uPush:{value:0.07}, uAspect:{value:innerWidth/innerHeight},
       uBase:{value:new THREE.Color(0xF1B86A)}, uHot:{value:new THREE.Color(0xFFD9A0)}
     };
     const pMat=new THREE.ShaderMaterial({uniforms,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,
-      vertexShader:`uniform float uSize; uniform float uScale; uniform float uScanY; varying float vGlow;
+      vertexShader:`uniform float uSize; uniform float uScale; uniform float uScanY;
+        uniform vec2 uMouse; uniform float uPushR; uniform float uPush; uniform float uAspect; varying float vGlow;
         void main(){ vec4 mv=modelViewMatrix*vec4(position,1.0);
+          vec4 clip=projectionMatrix*mv; vec2 ndc=clip.xy/clip.w;
+          vec2 d=ndc-uMouse; d.x*=uAspect; float dist=length(d);
+          float f=smoothstep(uPushR,0.0,dist);
+          if(f>0.0){ vec2 dir=dist>1e-4?normalize(d):vec2(0.0); dir.x/=uAspect;
+            mv.xy+=dir*f*uPush*(-mv.z); }
           gl_PointSize=uSize*uScale/(-mv.z); gl_Position=projectionMatrix*mv;
           vGlow=smoothstep(0.11,0.0,abs(position.y-uScanY)); }`,
       fragmentShader:`uniform sampler2D uTex; uniform vec3 uBase; uniform vec3 uHot; varying float vGlow;
@@ -410,7 +417,8 @@ window.HUMAN_HEIGHT=1.70;
     sizeLeads();
     addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
       renderer.setSize(innerWidth,innerHeight);sizeLeads();
-      uniforms.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5;});
+      uniforms.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5;
+      uniforms.uAspect.value=innerWidth/innerHeight;});
 
     // ---- hover interaction: mouse (desktop) + controller ray (VR) ----
     const ray=new THREE.Raycaster(), pointer=new THREE.Vector2(-2,-2), cMat=new THREE.Matrix4();
@@ -487,6 +495,7 @@ window.HUMAN_HEIGHT=1.70;
     fetch(MCP_BASE+'/status').then(r=>r.ok?r.json():Promise.reject()).then(()=>{syncDot.className='dot ok';syncState='ready';renderSync();}).catch(()=>{syncDot.className='dot err';syncState='offline';renderSync();});
 
     renderer.setAnimationLoop(()=>{const t=clock.getElapsedTime();
+      if(renderer.xr.isPresenting){uniforms.uMouse.value.set(-2,-2);}else{uniforms.uMouse.value.copy(pointer);}
       eMat.opacity=0.14+0.07*Math.sin(t*0.8);
       const h=detectHover();
       if(h!==hoverIdx){hoverIdx=h; if(h>=0)hoverStart=t; highlightRow(h);}
