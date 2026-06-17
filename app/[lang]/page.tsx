@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           <h1 dangerouslySetInnerHTML={html('hero.h1')} />
           <p className="lede">{t('hero.lede')}</p>
           <div className="hero-cta">
-            <a className="btn btn-primary" href="#contact">
+            <a className="btn btn-primary" href={`/${lang}/diagnostic`}>
               <i data-lucide="zap" /> <span>{t('hero.cta1')}</span>
             </a>
             <a className="btn btn-ghost" href="#manifest">
