@@ -1,0 +1,27 @@
+<!-- @dsCard group="Colors" viewport="700x180" name="Mist — Text & Neutrals" subtitle="The neutral ramp for text and UI on dark." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 26px; }
+  .row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .sw { display: flex; flex-direction: column; gap: 8px; }
+  .chip { height: 64px; border-radius: var(--radius-md); border: 1px solid var(--border-hairline); display: flex; align-items: flex-end; padding: 8px; }
+  .chip span { font-family: var(--font-display); font-size: 18px; }
+  .name { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .hex { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--slate-400)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">slate-400</span><span class="hex">disabled</span></div>
+    <div class="sw"><div class="chip" style="background:var(--mist-300)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">mist-300</span><span class="hex">muted</span></div>
+    <div class="sw"><div class="chip" style="background:var(--mist-200)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">mist-200</span><span class="hex">labels</span></div>
+    <div class="sw"><div class="chip" style="background:var(--mist-100)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">mist-100</span><span class="hex">body</span></div>
+    <div class="sw"><div class="chip" style="background:var(--paper-50)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">paper-50</span><span class="hex">strong</span></div>
+    <div class="sw"><div class="chip" style="background:var(--paper-0)"><span style="color:var(--ink-900)">Aa</span></div><span class="name">paper-0</span><span class="hex">inverse</span></div>
+  </div>
+</body>
+</html>

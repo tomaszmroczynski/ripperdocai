@@ -1,0 +1,47 @@
+<!-- @dsCard group="Components" viewport="700x260" name="Surfaces — Card" subtitle="Base panel: static, interactive, glowing." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 28px; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .h { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text-strong); margin-bottom: 8px; }
+  .p { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+  .lbl { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { Card } = window.RipperdocDesignSystem_cbf3c1;
+    function Demo() {
+      return (
+        <div className="row">
+          <Card>
+            <div className="lbl">Default</div>
+            <div className="h">Resting panel</div>
+            <div className="p">Lit-from-within ink surface with a hairline edge and top sheen.</div>
+          </Card>
+          <Card interactive>
+            <div className="lbl">Interactive</div>
+            <div className="h">Hover me</div>
+            <div className="p">Lifts 2px, borders ember and gains a warm glow on hover.</div>
+          </Card>
+          <Card glow>
+            <div className="lbl">Selected</div>
+            <div className="h">Active state</div>
+            <div className="p">Forced ember halo for the currently-selected surface.</div>
+          </Card>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  </script>
+</body>
+</html>

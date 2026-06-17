@@ -1,5 +1,42 @@
 import { getDict, locales } from '@/lib/i18n';
 import LangSwitcher from '@/components/LangSwitcher';
+import RevolutionStatement from '@/components/RevolutionStatement';
+
+const REV: Record<string, { eyebrow: string; lines: string[] }> = {
+  no: {
+    eyebrow: 'Revolusjonen',
+    lines: [
+      'Det andre tiåret av det 21. århundret er et vendepunkt.',
+      'En revolusjon pågår.',
+      'Den høyeste frykten: å bli erstattet.',
+      'Mitt svar er et annet: ikke erstatning, men forsterkning.',
+      'Jeg setter mennesket først.',
+      'Det er tryggheten jeg gir — å komme styrket gjennom endringen.'
+    ]
+  },
+  en: {
+    eyebrow: 'The revolution',
+    lines: [
+      'The second decade of the 21st century is a turning point.',
+      'A revolution is underway.',
+      'The loudest fear: being replaced.',
+      'My answer is different: not replacement, but amplification.',
+      'I put the human first.',
+      'That is the security I give — to come through this change stronger.'
+    ]
+  },
+  pl: {
+    eyebrow: 'Rewolucja',
+    lines: [
+      'Druga dekada XXI wieku to punkt zwrotny.',
+      'Trwa rewolucja.',
+      'Najgłośniejszy lęk: zostać zastąpionym.',
+      'Moja odpowiedź jest inna: nie zastąpienie, lecz wzmocnienie.',
+      'Stawiam człowieka na pierwszym miejscu.',
+      'To jest bezpieczeństwo, które daję — wyjść z tej zmiany silniejszym.'
+    ]
+  }
+};
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -91,6 +128,14 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           </div>
         </div>
       </header>
+
+      <section className="block rev" id="revolution">
+        <canvas data-neural-field data-sparks="2" data-density="0.00006" data-speed="0.08" />
+        <div className="wrap">
+          <div className="rev-eyebrow">{(REV[lang] ?? REV.en).eyebrow}</div>
+          <RevolutionStatement lines={(REV[lang] ?? REV.en).lines} />
+        </div>
+      </section>
 
       <section className="block" id="manifest">
         <div className="wrap manifesto">

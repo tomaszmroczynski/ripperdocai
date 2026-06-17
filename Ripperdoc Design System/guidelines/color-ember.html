@@ -1,0 +1,32 @@
+<!-- @dsCard group="Colors" viewport="700x210" name="Ember — The Signal" subtitle="Amber · copper · gold. Light where intelligence happens." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 26px; }
+  .row { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+  .sw { display: flex; flex-direction: column; gap: 8px; }
+  .chip { height: 72px; border-radius: var(--radius-md); border: 1px solid var(--border-hairline); }
+  .spark { box-shadow: var(--glow-spark-core); }
+  .name { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .hex { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+  .note { margin-top: 18px; font-family: var(--font-body); font-size: 13px; color: var(--text-muted); }
+  .note b { color: var(--ember-300); font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sw"><div class="chip" style="background:var(--ember-100)"></div><span class="name">100</span><span class="hex">#FBE9CC</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-200)"></div><span class="name">200</span><span class="hex">#F6D29A</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-300)"></div><span class="name">300</span><span class="hex">#F1B86A</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-400)"></div><span class="name">400</span><span class="hex">#EA9A3E</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-500)"></div><span class="name">500</span><span class="hex">#DD7E27</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-600)"></div><span class="name">600</span><span class="hex">#C0641F</span></div>
+    <div class="sw"><div class="chip" style="background:var(--ember-700)"></div><span class="name">700</span><span class="hex">#944B19</span></div>
+    <div class="sw"><div class="chip spark" style="background:var(--spark)"></div><span class="name">spark</span><span class="hex">#FFD9A0</span></div>
+  </div>
+  <p class="note"><b>ember-500</b> is the primary action. <b>ember-400</b> is the accent. <b>spark</b> is reserved for the hottest focal point — a single glowing node, never a fill.</p>
+</body>
+</html>

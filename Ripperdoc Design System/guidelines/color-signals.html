@@ -1,0 +1,25 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Signals — Semantic" subtitle="Muted, never candy. Status that respects the dark." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 26px; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .sig { border-radius: var(--radius-md); padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--border-hairline); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .top { display: flex; align-items: center; gap: 8px; }
+  .lab { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--text-strong); }
+  .hex { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="sig" style="background:var(--signal-up-bg)"><div class="top"><div class="dot" style="background:var(--signal-up)"></div><span class="lab">Growth</span></div><span class="hex">#5FA98C</span></div>
+    <div class="sig" style="background:var(--signal-warn-bg)"><div class="top"><div class="dot" style="background:var(--signal-warn)"></div><span class="lab">Attention</span></div><span class="hex">#EA9A3E</span></div>
+    <div class="sig" style="background:var(--signal-down-bg)"><div class="top"><div class="dot" style="background:var(--signal-down)"></div><span class="lab">Risk</span></div><span class="hex">#C8553D</span></div>
+    <div class="sig" style="background:var(--signal-info-bg)"><div class="top"><div class="dot" style="background:var(--signal-info)"></div><span class="lab">Info</span></div><span class="hex">#6E8FB8</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Radii — Curves" subtitle="The brand favours curves & arcs over sharp geometry." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 28px; }
+  .row { display: flex; gap: 16px; align-items: flex-end; }
+  .u { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .box { width: 84px; height: 84px; background: var(--ink-700); border: 1px solid var(--border-subtle); border-top-left-radius: 0; box-shadow: var(--edge-top); }
+  .u b { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .u span { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+  .pill { width: 84px; height: 40px; border-radius: var(--radius-pill); background: var(--ink-700); border: 1px solid var(--border-subtle); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="u"><div class="box" style="border-radius:var(--radius-sm)"></div><b>sm</b><span>8</span></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-md)"></div><b>md</b><span>12</span></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-lg)"></div><b>lg</b><span>16</span></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-xl)"></div><b>xl</b><span>24</span></div>
+    <div class="u"><div class="box" style="border-radius:var(--radius-2xl)"></div><b>2xl</b><span>32</span></div>
+    <div class="u"><div class="pill"></div><b>pill</b><span>999</span></div>
+  </div>
+</body>
+</html>

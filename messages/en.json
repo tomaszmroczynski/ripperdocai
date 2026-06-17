@@ -31,7 +31,7 @@
   "work.eyebrow": "Concept in progress — RipperSync",
   "work.launch": "Open the 3D bio-scan",
   "work.title": "AI-assisted training.",
-  "work.body": "Private AI on your side — on your own hardware, not in someone else's cloud. RipperSync brings VR sessions (Meta Quest 3) and health data into one picture, remembers your trend and turns numbers into decisions. You lead the training; the AI measures, remembers and suggests — the decision stays with you.",
+  "work.body": "There's no amplified mind without an amplified body — so I built RipperSync. Private AI on your side, on your own hardware, not in someone else's cloud: it brings VR sessions (Meta Quest 3) and health data into one picture, remembers your trend and turns numbers into decisions. You lead the training; the AI measures, remembers and suggests — the decision stays with you.",
   "work.note": "RipperSync collects data from your devices and turns it into AI-assisted decisions. Health data is sensitive, so it runs self-hosted — on your NAS or VPS, under your control. Integrations like Oura and Withings (via Health Connect) are examples — more are added per client, depending on the hardware you have or plan to get. A voice agent with ElevenLabs is planned for later versions.",
   "work.chip1": "Cyber-Ripper UI",
   "work.chip2": "Precision VR tracking",

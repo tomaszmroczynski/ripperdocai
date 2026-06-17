@@ -1,0 +1,189 @@
+<!-- @dsCard group="Marketing Site" viewport="1320x900" name="Ripperdoc — Landing" subtitle="Hero, manifesto, three pillars, CTA." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ripperdoc — Human capability, augmented</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: var(--ink-1000); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+  /* ---- Nav ---- */
+  .nav { position: sticky; top: 0; z-index: 100; backdrop-filter: var(--glass); background: rgba(7,9,12,0.72); border-bottom: 1px solid var(--border-hairline); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand img { width: 30px; height: 30px; color: var(--mist-100); }
+  .brand .name { font-family: var(--font-display); font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--text-strong); }
+  .brand .name .doc { color: var(--ember-400); }
+  .nav-links { display: flex; gap: 30px; align-items: center; }
+  .nav-links a { font-size: 14px; color: var(--text-muted); font-family: var(--font-body); }
+  .nav-links a:hover { color: var(--text-strong); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: var(--radius-md); font-family: var(--font-display); font-weight: 600; font-size: 14px; cursor: pointer; border: 1px solid transparent; transition: var(--t-color), var(--t-glow); }
+  .btn-primary { background: var(--action-primary); color: var(--text-on-ember); box-shadow: var(--glow-sm); }
+  .btn-primary:hover { background: var(--action-primary-hover); box-shadow: var(--glow-md); }
+  .btn-ghost { background: transparent; color: var(--text-body); border-color: var(--border-subtle); }
+  .btn-ghost:hover { border-color: var(--border-ember); color: var(--text-strong); }
+
+  /* ---- Hero ---- */
+  .hero { position: relative; min-height: 760px; overflow: hidden; display: flex; align-items: center; }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+  .hero-bg::after { content:""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,5,6,0.7) 0%, rgba(4,5,6,0.35) 40%, rgba(4,5,6,0.85) 100%); }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .hero-in { position: relative; z-index: 2; padding: 100px 0; max-width: 880px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 26px; padding: 7px 14px; border: 1px solid var(--border-ember); border-radius: var(--radius-pill); background: rgba(234,154,62,0.06); }
+  .eyebrow .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--ember-400); box-shadow: var(--glow-sm); }
+  h1 { font-size: 78px; line-height: 1.02; letter-spacing: -0.035em; font-weight: 600; color: var(--paper-50); margin-bottom: 26px; }
+  h1 em { font-style: normal; background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lede { font-size: 21px; line-height: 1.55; color: var(--mist-100); max-width: 620px; margin-bottom: 38px; }
+  .hero-cta { display: flex; gap: 14px; align-items: center; }
+  .lockup { display: flex; align-items: center; gap: 16px; margin-top: 64px; font-family: var(--font-display); font-weight: 300; font-size: 17px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mist-300); }
+  .lockup .x { color: var(--ember-400); }
+  .lockup .c { background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ---- Section frame ---- */
+  section.block { padding: 120px 0; border-top: 1px solid var(--border-hairline); }
+  .sec-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 18px; }
+  .sec-title { font-size: 46px; line-height: 1.08; letter-spacing: -0.025em; color: var(--text-strong); max-width: 760px; margin-bottom: 22px; }
+  .sec-sub { font-size: 18px; color: var(--text-muted); max-width: 640px; line-height: 1.6; }
+
+  /* ---- Pillars ---- */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 64px; }
+  .pillar { position: relative; background: var(--surface-card); background-image: var(--grad-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); padding: 34px; transition: border-color var(--dur-base) var(--ease-signal), transform var(--dur-base) var(--ease-signal); }
+  .pillar:hover { border-color: var(--border-ember); transform: translateY(-3px); }
+  .pillar .ic { width: 52px; height: 52px; border-radius: var(--radius-md); background: var(--ink-700); border: 1px solid var(--border-hairline); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; box-shadow: var(--edge-top); }
+  .pillar .ic svg { width: 24px; height: 24px; color: var(--ember-300); stroke-width: 1.5; }
+  .pillar h3 { font-size: 22px; margin-bottom: 12px; color: var(--text-strong); }
+  .pillar p { font-size: 15px; color: var(--text-muted); line-height: 1.62; }
+  .pillar .meta { margin-top: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-faint); display: flex; align-items: center; gap: 8px; }
+
+  /* ---- Manifesto ---- */
+  .manifesto { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .manifesto-art { position: relative; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--border-subtle); aspect-ratio: 4/5; }
+  .manifesto-art img { width: 100%; height: 100%; object-fit: cover; }
+  .manifesto-art .scrim { position: absolute; inset: 0; background: var(--grad-scrim); }
+  .manifesto-art .tag { position: absolute; left: 26px; bottom: 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-200); }
+  .quote { font-size: 30px; line-height: 1.36; letter-spacing: -0.02em; color: var(--paper-50); font-weight: 400; }
+  .quote em { font-style: normal; color: var(--ember-300); }
+  .manifesto p.body { margin-top: 26px; font-size: 16px; line-height: 1.72; color: var(--text-muted); }
+
+  /* ---- Closing CTA ---- */
+  .cta { position: relative; text-align: center; border-radius: var(--radius-2xl); overflow: hidden; border: 1px solid var(--border-subtle); padding: 96px 40px; background: var(--ink-900); }
+  .cta canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cta-in { position: relative; z-index: 2; }
+  .cta h2 { font-size: 52px; letter-spacing: -0.03em; color: var(--paper-50); margin-bottom: 18px; }
+  .cta p { font-size: 18px; color: var(--text-muted); margin-bottom: 34px; }
+
+  /* ---- Footer ---- */
+  footer { border-top: 1px solid var(--border-hairline); padding: 48px 0; }
+  .foot-in { display: flex; align-items: center; justify-content: space-between; }
+  .foot-in .copy { font-size: 13px; color: var(--text-faint); font-family: var(--font-mono); }
+  i[data-lucide] { width: 1em; height: 1em; }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-in">
+      <div class="brand">
+        <img src="../../assets/logo/ripperdoc-mark.svg" alt="">
+        <span class="name">Ripper<span class="doc">doc</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Augmentations</a>
+        <a href="#">Method</a>
+        <a href="#">Manifesto</a>
+        <a href="#">Studio</a>
+        <button class="btn btn-ghost">Book a session</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"><img src="../../assets/img/summit-network.png" alt=""></div>
+    <canvas data-neural-field data-sparks="4" data-density="0.00008" data-speed="0.12"></canvas>
+    <div class="wrap hero-in">
+      <div class="eyebrow"><span class="pip"></span>Augmentation, not automation</div>
+      <h1>We extend what<br>humans can <em>do</em>.</h1>
+      <p class="lede">A ripperdoc once enhanced the body with cybernetics. We enhance the mind — with AI, intelligent systems and automation that make one person capable of what once took a team.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary"><i data-lucide="zap"></i> Start an augmentation</button>
+        <button class="btn btn-ghost">See the method <i data-lucide="arrow-right"></i></button>
+      </div>
+      <div class="lockup"><span>AI</span><span class="x">×</span><span>SOFTWARE</span><span class="x">×</span><span class="c">HARDWARE</span></div>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-eyebrow">Three planes of augmentation</div>
+      <h2 class="sec-title">Technology around the human — never in their place.</h2>
+      <p class="sec-sub">Every engagement layers intelligence onto the person who stays in the centre. The human remains the hero; the system is the extension.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="ic"><i data-lucide="brain"></i></div>
+          <h3>Intelligence</h3>
+          <p>AI agents and decision-support that let a person reason over more information, faster — without surrendering judgment.</p>
+          <div class="meta"><i data-lucide="waypoints"></i> Agents · Copilots · Reasoning</div>
+        </div>
+        <div class="pillar">
+          <div class="ic"><i data-lucide="code-xml"></i></div>
+          <h3>Software</h3>
+          <p>Connected systems and automation that remember, coordinate and act — turning intent into executed work across tools.</p>
+          <div class="meta"><i data-lucide="git-branch"></i> Automation · Knowledge · Flow</div>
+        </div>
+        <div class="pillar">
+          <div class="ic"><i data-lucide="cpu"></i></div>
+          <h3>Hardware</h3>
+          <p>The instruments and infrastructure that ground intelligence in the physical world, reliably and at scale.</p>
+          <div class="meta"><i data-lucide="layers"></i> Devices · Compute · Edge</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap manifesto">
+      <div class="manifesto-art">
+        <img src="../../assets/img/portrait-neural.jpg" alt="">
+        <div class="scrim"></div>
+        <div class="tag">Human + intelligence</div>
+      </div>
+      <div>
+        <div class="sec-eyebrow">The manifesto</div>
+        <p class="quote">If cybernetic implants enhanced the body, <em>intelligence enhances the mind.</em></p>
+        <p class="body">A modern ripperdoc does not install cybernetic eyes. They help people see more through data, think faster through AI, and remember through knowledge systems. In that sense, AI architects and automation specialists are the digital descendants of the ripperdoc — helping people cross their own limits.</p>
+        <p class="body">We design those augmentations. Quietly, precisely, and always in service of the person using them.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="cta">
+        <canvas data-neural-field data-sparks="3" data-density="0.00012"></canvas>
+        <div class="cta-in">
+          <h2>What could you do, augmented?</h2>
+          <p>Book a diagnostic session. We map your limits — then design the augmentation that removes them.</p>
+          <button class="btn btn-primary" style="height:52px;padding:0 28px;font-size:16px"><i data-lucide="zap"></i> Book a session</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-in">
+      <div class="brand">
+        <img src="../../assets/logo/ripperdoc-mark.svg" alt="" style="width:24px;height:24px;color:var(--mist-300)">
+        <span class="name" style="font-size:16px">Ripper<span class="doc">doc</span></span>
+      </div>
+      <span class="copy">© 2026 Ripperdoc — We expand human capability</span>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/neural-field.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Iconography — Lucide" subtitle="Thin-line, architectural. The reference icon set." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 30px; }
+  .grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 16px; }
+  .ic { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .ic .box { width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--ink-700); border: 1px solid var(--border-hairline); display: flex; align-items: center; justify-content: center; box-shadow: var(--edge-top); }
+  .ic svg { width: 24px; height: 24px; color: var(--ember-300); stroke-width: 1.5; }
+  .ic span { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="ic"><div class="box"><i data-lucide="brain"></i></div><span>brain</span></div>
+    <div class="ic"><div class="box"><i data-lucide="database"></i></div><span>database</span></div>
+    <div class="ic"><div class="box"><i data-lucide="settings-2"></i></div><span>settings</span></div>
+    <div class="ic"><div class="box"><i data-lucide="code-xml"></i></div><span>code</span></div>
+    <div class="ic"><div class="box"><i data-lucide="cpu"></i></div><span>cpu</span></div>
+    <div class="ic"><div class="box"><i data-lucide="share-2"></i></div><span>network</span></div>
+    <div class="ic"><div class="box"><i data-lucide="waypoints"></i></div><span>nodes</span></div>
+    <div class="ic"><div class="box"><i data-lucide="activity"></i></div><span>signal</span></div>
+    <div class="ic"><div class="box"><i data-lucide="target"></i></div><span>target</span></div>
+    <div class="ic"><div class="box"><i data-lucide="zap"></i></div><span>spark</span></div>
+    <div class="ic"><div class="box"><i data-lucide="layers"></i></div><span>layers</span></div>
+    <div class="ic"><div class="box"><i data-lucide="orbit"></i></div><span>orbit</span></div>
+    <div class="ic"><div class="box"><i data-lucide="circuit-board"></i></div><span>circuit</span></div>
+    <div class="ic"><div class="box"><i data-lucide="scan-eye"></i></div><span>vision</span></div>
+    <div class="ic"><div class="box"><i data-lucide="git-branch"></i></div><span>flow</span></div>
+    <div class="ic"><div class="box"><i data-lucide="user-round"></i></div><span>human</span></div>
+  </div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

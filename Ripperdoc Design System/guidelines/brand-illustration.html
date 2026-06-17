@@ -1,0 +1,47 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Illustration System" subtitle="Human base + neural overlay + spark. The recipe." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 24px; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+  .stage { position: relative; height: 200px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-hairline); background: var(--ink-1000); }
+  .stage img.base { width: 100%; height: 100%; object-fit: cover; }
+  .stage .overlay { position: absolute; inset: 0; }
+  .stage .overlay img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+  .spark { position: absolute; width: 150px; height: 150px; left: 38%; top: 30%; background: var(--grad-spark); }
+  .stage .step { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember-200); background: rgba(4,5,6,0.6); padding: 4px 9px; border-radius: var(--radius-pill); z-index: 4; backdrop-filter: blur(6px); }
+  .cap { font-family: var(--font-body); font-size: 12.5px; color: var(--text-muted); margin-top: 10px; text-align: center; }
+  .dim { filter: grayscale(0.4) brightness(0.7); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div>
+      <div class="stage">
+        <span class="step">01 · Human</span>
+        <img class="base dim" src="../assets/img/portrait-neural.jpg" alt="">
+      </div>
+      <div class="cap">A real person, low-key, central.</div>
+    </div>
+    <div>
+      <div class="stage">
+        <span class="step">02 · Network</span>
+        <img class="base dim" src="../assets/img/portrait-neural.jpg" alt="">
+        <div class="overlay" style="opacity:0.5"><img src="../assets/motifs/node-lattice.svg" alt=""></div>
+      </div>
+      <div class="cap">Neural lattice grows from the mind.</div>
+    </div>
+    <div>
+      <div class="stage">
+        <span class="step">03 · Spark</span>
+        <img class="base" src="../assets/img/portrait-neural.jpg" alt="">
+        <div class="spark"></div>
+      </div>
+      <div class="cap">Warm spark marks the insight.</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Signature Gradients" subtitle="Horizon, ember, and the neural spark." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 26px; }
+  .row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; }
+  .g { height: 110px; border-radius: var(--radius-lg); border: 1px solid var(--border-hairline); position: relative; overflow: hidden; }
+  .spark { background: var(--ink-1000); display:flex;align-items:center;justify-content:center; }
+  .spark::after { content:""; width: 90px; height: 90px; border-radius: 50%; background: var(--grad-spark); }
+  .lab { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-top: 9px; }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div><div class="g" style="background:var(--grad-horizon)"></div><div class="lab">grad-horizon</div></div>
+    <div><div class="g" style="background:var(--grad-ember)"></div><div class="lab">grad-ember</div></div>
+    <div><div class="g spark"></div><div class="lab">grad-spark</div></div>
+  </div>
+</body>
+</html>

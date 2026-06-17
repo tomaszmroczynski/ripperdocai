@@ -1,0 +1,89 @@
+/* ============================================================
+   RIPPERDOC — Color System
+   "Light as neural activity against deep, intelligent dark."
+
+   The palette is built on two forces:
+   - INK   — deep, near-black surfaces (navy/graphite) = the mind at rest
+   - EMBER — warm amber / copper / gold = the signal, the spark, insight
+
+   Light is never decorative. It marks where intelligence is happening.
+   ============================================================ */
+
+:root {
+  /* ---- INK — base surfaces (deep, cool, intelligent) ---- */
+  --ink-1000: #040506;   /* absolute black, used for full-bleed cinematic frames */
+  --ink-900:  #07090C;   /* page background */
+  --ink-850:  #0B0E13;   /* raised background */
+  --ink-800:  #11151B;   /* card / panel surface */
+  --ink-700:  #181D25;   /* elevated card, input wells */
+  --ink-600:  #222932;   /* hairline-strong, hover surface */
+  --graphite-500: #2E3742; /* borders on dark, dividers */
+  --graphite-400: #3D4856; /* strong border, disabled fill */
+
+  /* ---- SLATE / MIST — neutral text & UI on dark ---- */
+  --slate-400: #5A6573;  /* muted/disabled text */
+  --mist-300:  #828D9C;  /* secondary text, captions */
+  --mist-200:  #AAB4C0;  /* tertiary headings, labels */
+  --mist-100:  #D2D8E0;  /* body text on dark */
+  --paper-50:  #EEF1F5;  /* high-emphasis text, near-white */
+  --paper-0:   #FBFCFE;  /* pure highlight / inverse surface */
+
+  /* ---- EMBER — the signal (amber / copper / gold) ---- */
+  --ember-100: #FBE9CC;  /* faint glow, tint backgrounds */
+  --ember-200: #F6D29A;  /* soft gold, secondary accent text */
+  --ember-300: #F1B86A;  /* gold */
+  --ember-400: #EA9A3E;  /* amber — primary accent */
+  --ember-500: #DD7E27;  /* copper-amber — primary action */
+  --ember-600: #C0641F;  /* copper — pressed / deep */
+  --ember-700: #944B19;  /* burnt copper — borders on tint */
+  --spark:     #FFD9A0;  /* the core of the light — hottest point */
+
+  /* ---- SEMANTIC (muted, never candy) ---- */
+  --signal-up:    #5FA98C;  /* success / growth — muted neural green */
+  --signal-up-bg: #122019;
+  --signal-warn:    #EA9A3E; /* shares the ember language */
+  --signal-warn-bg: #221708;
+  --signal-down:    #C8553D; /* danger — oxidised copper-red */
+  --signal-down-bg: #20100C;
+  --signal-info:    #6E8FB8; /* info — cool node blue */
+  --signal-info-bg: #0E1620;
+
+  /* ============================================================
+     SEMANTIC ALIASES — reference these in product code
+     ============================================================ */
+
+  /* Surfaces */
+  --bg-base:        var(--ink-900);
+  --bg-sunken:      var(--ink-1000);
+  --bg-raised:      var(--ink-850);
+  --surface-card:   var(--ink-800);
+  --surface-input:  var(--ink-700);
+  --surface-hover:  var(--ink-600);
+  --surface-inverse: var(--paper-0);
+
+  /* Text */
+  --text-strong:    var(--paper-50);
+  --text-body:      var(--mist-100);
+  --text-muted:     var(--mist-300);
+  --text-faint:     var(--slate-400);
+  --text-on-ember:  var(--ink-1000);
+  --text-accent:    var(--ember-300);
+
+  /* Borders */
+  --border-hairline: rgba(255, 255, 255, 0.06);
+  --border-subtle:   rgba(255, 255, 255, 0.10);
+  --border-strong:   var(--graphite-500);
+  --border-ember:    rgba(234, 154, 62, 0.42);
+
+  /* Actions */
+  --action-primary:        var(--ember-500);
+  --action-primary-hover:  var(--ember-400);
+  --action-primary-press:  var(--ember-600);
+  --focus-ring:            rgba(234, 154, 62, 0.55);
+
+  /* Neural light — for glows, gradients, plot strokes */
+  --glow-ember:   rgba(234, 154, 62, 0.45); /* @kind color */
+  --glow-spark:   rgba(255, 217, 160, 0.65); /* @kind color */
+  --thread:       rgba(234, 154, 62, 0.22);  /* @kind color */
+  --thread-faint: rgba(170, 180, 192, 0.10); /* @kind color */
+}

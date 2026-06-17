@@ -1,0 +1,36 @@
+<!-- @dsCard group="Motion" viewport="700x250" name="Motion Language" subtitle="Four signature motions. Alive, never flashy." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; background: var(--ink-1000); padding: 28px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .cell { background: var(--ink-850); border: 1px solid var(--border-hairline); border-radius: var(--radius-lg); height: 168px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; position: relative; }
+  .name { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .meta { position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-family: var(--font-mono); font-size: 9px; color: var(--text-faint); }
+
+  .breath { width: 46px; height: 46px; border-radius: 50%; background: var(--grad-spark); animation: rd-breath var(--dur-breath) var(--ease-in-out) infinite; }
+
+  .pulse { width: 16px; height: 16px; border-radius: 50%; background: var(--ember-400); animation: rd-pulse-ring 1.8s var(--ease-out) infinite; }
+
+  .track { width: 76%; height: 2px; background: var(--thread); border-radius: 2px; position: relative; }
+  .track::after { content:""; position: absolute; top: 50%; margin-top: -5px; width: 10px; height: 10px; border-radius: 50%; background: var(--spark); box-shadow: var(--glow-spark-core); animation: sig 2.2s var(--ease-in-out) infinite; }
+  @keyframes sig { 0%{left:0;opacity:0} 12%{opacity:1} 100%{left:calc(100% - 10px);opacity:0.2} }
+
+  .rise-wrap { display: flex; flex-direction: column; gap: 7px; }
+  .rise { width: 90px; height: 9px; border-radius: var(--radius-pill); background: var(--ink-600); animation: rd-rise 1.6s var(--ease-out) infinite; }
+  .rise.b { width: 64px; animation-delay: 0.12s; }
+  .rise.c { width: 40px; animation-delay: 0.24s; background: var(--ember-500); }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="cell"><span class="meta">breath · 4200ms · ease-in-out</span><div class="breath"></div><span class="name">Breathe · ambient light</span></div>
+    <div class="cell"><span class="meta">pulse-ring · 1800ms</span><div class="pulse"></div><span class="name">Pulse · activation</span></div>
+    <div class="cell"><span class="meta">signal · 2200ms</span><div class="track"></div><span class="name">Signal · travels a link</span></div>
+    <div class="cell"><span class="meta">rise · ease-out</span><div class="rise-wrap"><div class="rise"></div><div class="rise b"></div><div class="rise c"></div></div><span class="name">Rise · content enters</span></div>
+  </div>
+</body>
+</html>

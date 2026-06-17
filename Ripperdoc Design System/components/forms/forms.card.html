@@ -1,0 +1,47 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Forms — Input, Switch" subtitle="Sunken wells, ember focus, activating toggles." -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--bg-base); padding: 28px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  i[data-lucide] { width: 1em; height: 1em; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script type="text/babel">
+    const { Input, Switch } = window.RipperdocDesignSystem_cbf3c1;
+    const Ic = ({n}) => <i data-lucide={n}></i>;
+    function Demo() {
+      const [a, setA] = React.useState(true);
+      const [b, setB] = React.useState(false);
+      return (
+        <div className="grid">
+          <div className="stack">
+            <Input label="Workspace" defaultValue="ripperdoc-labs" iconLeft={<Ic n="search"/>} />
+            <Input label="Operator email" placeholder="you@studio.com" />
+            <Input label="API key" invalid hint="That key was rejected." defaultValue="sk-live-…" />
+          </div>
+          <div className="stack">
+            <Switch checked={a} onChange={setA} label="Auto-augment workflows" />
+            <Switch checked={b} onChange={setB} label="Stream signal telemetry" />
+            <Switch checked={false} disabled label="Legacy mode (locked)" />
+            <Switch checked={true} disabled label="Human-in-the-loop (required)" />
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+    setTimeout(() => window.lucide && lucide.createIcons(), 60);
+  </script>
+</body>
+</html>
