@@ -57,6 +57,8 @@
   @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
   .panel.left{left:34px;top:50%;transform:translateY(-50%);animation-delay:.4s}
   .panel.right{right:34px;top:50%;transform:translateY(-50%);animation-delay:.55s}
+  .p-eyebrow{cursor:move}
+  .panel.expanded{left:4vw !important;top:4vh !important;right:auto !important;bottom:auto !important;width:92vw !important;height:92vh !important;max-height:none !important;transform:none !important;z-index:30;overflow:auto;background:rgba(7,9,12,.55);-webkit-backdrop-filter:saturate(140%) blur(18px);backdrop-filter:saturate(140%) blur(18px)}
   .p-eyebrow{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.26em;color:var(--mist-300);
     text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
   .p-eyebrow::before{content:"";width:14px;height:1px;background:var(--ember-400)}
@@ -225,6 +227,71 @@ window.HUMAN_HEIGHT=1.70;
       var sw=document.getElementById('bs-lang');
       if(sw) sw.addEventListener('click',function(e){var b=e.target.closest('button'); if(b) window.rdApplyLang(b.getAttribute('data-lang'));});
       window.rdApplyLang(window.RD_LANG);
+    });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      var dragging = false, sx = 0, sy = 0, startLeft = 0, startTop = 0;
+      var saved = null;
+      function freeze() {
+        var r = panel.getBoundingClientRect();
+        panel.style.left = r.left + 'px';
+        panel.style.top = r.top + 'px';
+        panel.style.right = 'auto';
+        panel.style.bottom = 'auto';
+        panel.style.transform = 'none';
+      }
+      panel.addEventListener('pointerdown', function (e) {
+        if (e.button) return;
+        if (panel.classList.contains('expanded')) return;
+        if (e.target.closest('button, a, input, textarea, .cta')) return;
+        var r = panel.getBoundingClientRect();
+        if (e.clientY - r.top > 52) return; // only the top strip starts a drag
+        dragging = true;
+        freeze();
+        r = panel.getBoundingClientRect();
+        startLeft = r.left; startTop = r.top; sx = e.clientX; sy = e.clientY;
+        panel.style.zIndex = '20';
+        document.body.style.userSelect = 'none';
+        e.preventDefault();
+      });
+      window.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var nl = startLeft + (e.clientX - sx);
+        var nt = startTop + (e.clientY - sy);
+        var w = panel.offsetWidth;
+        nl = Math.max(60 - w, Math.min(nl, window.innerWidth - 60));
+        nt = Math.max(6, Math.min(nt, window.innerHeight - 44));
+        panel.style.left = nl + 'px';
+        panel.style.top = nt + 'px';
+      });
+      window.addEventListener('pointerup', function () {
+        if (!dragging) return;
+        dragging = false;
+        document.body.style.userSelect = '';
+      });
+      panel.addEventListener('dblclick', function (e) {
+        if (e.target.closest('button, a, input, textarea, .cta')) return;
+        if (!panel.classList.contains('expanded')) {
+          saved = {
+            left: panel.style.left, top: panel.style.top,
+            right: panel.style.right, bottom: panel.style.bottom,
+            transform: panel.style.transform, width: panel.style.width,
+            height: panel.style.height, zIndex: panel.style.zIndex
+          };
+          ['left', 'top', 'right', 'bottom', 'transform', 'width', 'height', 'zIndex']
+            .forEach(function (k) { panel.style[k] = ''; });
+          panel.classList.add('expanded');
+        } else {
+          panel.classList.remove('expanded');
+          if (saved) {
+            Object.keys(saved).forEach(function (k) { panel.style[k] = saved[k]; });
+          }
+        }
+      });
     });
   })();
   </script>
