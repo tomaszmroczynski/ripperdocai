@@ -593,3 +593,25 @@ a.scan-preview { text-decoration: none; }
 .hero-in .rev-line em { font-style: normal; background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
 @media (max-width: 880px) { .hero-in .rev-line { font-size: 48px; } .hero-in .rev-stage { min-height: 150px; } }
 @media (max-width: 560px) { .hero-in .rev-line { font-size: 34px; line-height: 1.1; } .hero-in .rev-stage { min-height: 132px; } }
+
+/* ---- "Learn more" link in the RipperSync section ---- */
+.work-more { margin-top: 18px; }
+.work-more a { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--ember-300); text-decoration: none; }
+.work-more a:hover { color: var(--ember-200); }
+
+/* ---- RipperSync subpage ---- */
+.rs-page { min-height: 100vh; padding: 96px 0 90px; }
+.rs-wrap { max-width: 760px; }
+.rs-back { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
+.rs-back:hover { color: var(--text-strong); }
+.rs-title { font-size: 44px; line-height: 1.08; letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 26px; }
+.rs-lead { font-size: 17px; line-height: 1.7; color: var(--text-muted); margin-bottom: 18px; }
+.rs-h2 { font-size: 26px; letter-spacing: -0.02em; color: var(--text-strong); margin: 44px 0 18px; }
+.rs-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.rs-steps li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.6; color: var(--text-muted); }
+.rs-num { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-ember); color: var(--ember-300); font-family: var(--font-mono); font-size: 13px; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.rs-bio { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.rs-bio li { position: relative; padding-left: 18px; font-size: 16px; line-height: 1.6; color: var(--text-muted); }
+.rs-bio li::before { content: ""; position: absolute; left: 0; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--ember-400); box-shadow: var(--glow-sm); }
+.rs-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 40px; }
+@media (max-width: 560px) { .rs-page { padding: 64px 0 64px; } .rs-title { font-size: 30px; } .rs-cta .btn { width: 100%; justify-content: center; } }

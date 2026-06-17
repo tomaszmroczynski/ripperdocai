@@ -227,6 +227,9 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
               </span>
             </div>
             <div className="work-meta">{t('work.stack')}</div>
+            <p className="work-more">
+              <a href={`/${lang}/ripper-sync`}>{t('work.more')} →</a>
+            </p>
           </div>
         </div>
       </section>
