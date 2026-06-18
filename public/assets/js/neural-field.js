@@ -50,6 +50,7 @@
     }
 
     function frame(t) {
+      if (!canvas.isConnected) return; // canvas removed (client-side navigation) → stop loop
       ctx.clearRect(0, 0, w, h);
       // connections
       for (let i = 0; i < nodes.length; i++) {
@@ -99,9 +100,14 @@
   }
 
   function boot() {
-    document.querySelectorAll('canvas[data-neural-field]').forEach(initField);
+    document.querySelectorAll('canvas[data-neural-field]').forEach(function (c) {
+      if (c.dataset.nfInit) return; // already initialized → don't double-bind
+      c.dataset.nfInit = '1';
+      initField(c);
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   window.RipperdocNeuralField = initField;
+  window.RipperdocNeuralFieldBoot = boot; // re-scan for new canvases after client navigation
 })();
