@@ -686,6 +686,13 @@ a.scan-preview { text-decoration: none; }
   .rs-arch-ar { transform: rotate(90deg); }
 }
 
+/* ---- Embedded 3D visualization (bio-scan / brain-storm as a section) ---- */
+.viz-embed { position: relative; margin: 26px 0 10px; border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); overflow: hidden; background: var(--ink-1000); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
+.viz-embed iframe { display: block; width: 100%; height: 62vh; min-height: 460px; border: 0; }
+.viz-fs { display: inline-flex; align-items: center; gap: 7px; margin-top: 4px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ember-300); text-decoration: none; }
+.viz-fs:hover { color: var(--ember-200); }
+@media (max-width: 560px) { .viz-embed iframe { height: 68vh; min-height: 380px; } }
+
 /* ============================================================
    Dossier "/o-mnie" — access gate + content
    ============================================================ */

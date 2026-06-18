@@ -348,6 +348,12 @@ export async function generateMetadata({
   };
 }
 
+const VIZ_RS: Record<string, { cap: string; fs: string; trinity: string }> = {
+  no: { cap: '3D bio-scan — kroppen som signal', fs: 'Åpne i fullskjerm', trinity: 'Se Ripper Trinity' },
+  en: { cap: '3D bio-scan — the body as signal', fs: 'Open fullscreen', trinity: 'Explore Ripper Trinity' },
+  pl: { cap: 'Bio-skan 3D — ciało jako sygnał', fs: 'Otwórz pełny ekran', trinity: 'Zobacz Ripper Trinity' }
+};
+
 export default async function RipperSyncPage({
   params
 }: {
@@ -355,6 +361,7 @@ export default async function RipperSyncPage({
 }) {
   const { lang } = await params;
   const u = UI[lang] ?? UI.en;
+  const v = VIZ_RS[lang] ?? VIZ_RS.en;
   return (
     <main className="rs-page">
       <div className="wrap rs-wrap">
@@ -369,6 +376,16 @@ export default async function RipperSyncPage({
             {p}
           </p>
         ))}
+
+        <div className="rs-fig" style={{ padding: 0, background: 'transparent', border: 0 }}>
+          <p className="rs-figcap">{v.cap}</p>
+          <div className="viz-embed">
+            <iframe src={`/bio-scan-3d.html?lang=${lang}`} title="RipperSync — bio-scan 3D" loading="lazy" />
+          </div>
+          <a className="viz-fs" href={`/bio-scan-3d.html?lang=${lang}`} target="_blank" rel="noopener">
+            ↗ {v.fs}
+          </a>
+        </div>
 
         <FlowStrip flow={u.viz.flow} />
 
@@ -388,14 +405,9 @@ export default async function RipperSyncPage({
           <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>
             {u.ctaDiag}
           </Link>
-          <a
-            className="btn btn-ghost"
-            href={`/bio-scan-3d.html?lang=${lang}`}
-            target="_blank"
-            rel="noopener"
-          >
-            {u.ctaScan}
-          </a>
+          <Link className="btn btn-ghost" href={`/${lang}/ripper-trinity`}>
+            {v.trinity}
+          </Link>
         </div>
       </div>
     </main>
