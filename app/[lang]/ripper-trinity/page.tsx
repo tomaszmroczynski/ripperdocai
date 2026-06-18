@@ -133,7 +133,7 @@ export default async function RipperTrinityPage({
           </p>
         ))}
 
-        <div className="rs-fig" style={{ padding: 0, background: 'transparent', border: 0 }}>
+        <div className="viz-block">
           <p className="rs-figcap">{u.vizCap}</p>
           <div className="viz-embed">
             <iframe src={`/brain-storm-3d.html?lang=${lang}`} title="Ripper Trinity — brainstorm" loading="lazy" />

@@ -377,7 +377,7 @@ export default async function RipperSyncPage({
           </p>
         ))}
 
-        <div className="rs-fig" style={{ padding: 0, background: 'transparent', border: 0 }}>
+        <div className="viz-block">
           <p className="rs-figcap">{v.cap}</p>
           <div className="viz-embed">
             <iframe src={`/bio-scan-3d.html?lang=${lang}`} title="RipperSync — bio-scan 3D" loading="lazy" />

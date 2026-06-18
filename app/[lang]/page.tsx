@@ -72,6 +72,41 @@ const scanSvg = `
   <rect class="scan-sweep" x="48" y="20" width="224" height="22" fill="url(#scanline)"/>
 </svg>`;
 
+const trinitySvg = `
+<svg class="scan-svg" viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <defs>
+    <radialGradient id="tcore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD9A0" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#EA9A3E" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#EA9A3E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g stroke="rgba(234,154,62,0.28)" stroke-width="1" fill="none">
+    <circle cx="78" cy="125" r="46" stroke="rgba(255,255,255,0.06)"/>
+    <path d="M54 100 L96 116 M54 150 L92 134 M70 92 L86 162 M48 125 L112 125"/>
+  </g>
+  <g fill="#F1B86A">
+    <circle cx="54" cy="100" r="2.6"/><circle cx="96" cy="116" r="3.2"/><circle cx="54" cy="150" r="2.6"/>
+    <circle cx="92" cy="134" r="2.6"/><circle cx="70" cy="92" r="2.2"/><circle cx="86" cy="162" r="2.2"/><circle cx="112" cy="125" r="3.6" fill="#FFD9A0"/>
+  </g>
+  <g stroke="rgba(234,154,62,0.28)" stroke-width="1" fill="none">
+    <circle cx="242" cy="125" r="46" stroke="rgba(255,255,255,0.06)"/>
+    <path d="M266 100 L224 116 M266 150 L228 134 M250 92 L234 162 M272 125 L208 125"/>
+  </g>
+  <g fill="#F1B86A">
+    <circle cx="266" cy="100" r="2.6"/><circle cx="224" cy="116" r="3.2"/><circle cx="266" cy="150" r="2.6"/>
+    <circle cx="228" cy="134" r="2.6"/><circle cx="250" cy="92" r="2.2"/><circle cx="234" cy="162" r="2.2"/><circle cx="208" cy="125" r="3.6" fill="#FFD9A0"/>
+  </g>
+  <g fill="none" stroke-linecap="round">
+    <path d="M112 125 C150 80 170 80 208 125" stroke="#EA9A3E" stroke-width="2"/>
+    <path d="M112 125 C150 170 170 170 208 125" stroke="#DD7E27" stroke-width="2" opacity="0.85"/>
+    <path d="M138 96 l10 -9 l-4 12 l12 -5" stroke="#FFD9A0" stroke-width="1.3" opacity="0.85"/>
+    <path d="M182 156 l10 9 l-4 -12 l12 5" stroke="#FFD9A0" stroke-width="1.3" opacity="0.7"/>
+  </g>
+  <circle class="spark-node" cx="160" cy="125" r="34" fill="url(#tcore)"/>
+  <circle cx="160" cy="125" r="8" fill="#FFF3DF"/>
+</svg>`;
+
 export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const d = getDict(lang);
@@ -208,6 +243,28 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
             <div className="work-meta">{t('work.stack')}</div>
             <p className="work-more">
               <a href={`/${lang}/ripper-sync`}>{t('work.more')} →</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="block" id="trinity">
+        <div className="wrap atlas">
+          <a className="atlas-panel scan-preview" href={`/${lang}/ripper-trinity`}>
+            <div className="badge">Ripper Trinity</div>
+            <div dangerouslySetInnerHTML={{ __html: trinitySvg }} />
+            <div className="scan-cta">
+              <i data-lucide="brain" /> <span>{t('trinity.launch')}</span>
+            </div>
+          </a>
+          <div>
+            <div className="sec-eyebrow">{t('trinity.eyebrow')}</div>
+            <h2 className="sec-title" style={{ fontSize: 40 }}>
+              {t('trinity.title')}
+            </h2>
+            <p className="sec-sub">{t('trinity.body')}</p>
+            <p className="work-more">
+              <a href={`/${lang}/ripper-trinity`}>{t('work.more')} →</a>
             </p>
           </div>
         </div>
