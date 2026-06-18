@@ -4,7 +4,7 @@ import type { MetadataRoute } from 'next';
 // Google-Extended, etc. are covered by the wildcard allow).
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: '*', allow: '/' }],
+    rules: [{ userAgent: '*', allow: '/', disallow: ['/api/', '/no/o-mnie', '/en/o-mnie', '/pl/o-mnie'] }],
     sitemap: 'https://ripperdoc.ai/sitemap.xml',
     host: 'https://ripperdoc.ai'
   };

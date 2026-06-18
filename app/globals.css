@@ -685,3 +685,89 @@ a.scan-preview { text-decoration: none; }
   .rs-fig { padding: 22px 16px 18px; }
   .rs-arch-ar { transform: rotate(90deg); }
 }
+
+/* ============================================================
+   Dossier "/o-mnie" — access gate + content
+   ============================================================ */
+
+/* ---- Access gate (terminal) ---- */
+.gate { position: relative; min-height: calc(100vh - 69px); min-height: calc(100dvh - 69px); display: grid; place-items: center; padding: 56px 0; overflow: hidden; }
+.gate canvas[data-neural-field] { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.gate-in { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.gate-back { align-self: flex-start; margin-bottom: 22px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
+.gate-back:hover { color: var(--text-strong); }
+.gate-card { width: min(460px, 92vw); text-align: center; padding: 42px 34px; border: 1px solid var(--border-subtle); border-radius: var(--radius-2xl); background: radial-gradient(130% 100% at 50% 0%, rgba(234,154,62,0.07), rgba(7,9,12,0) 60%), var(--surface-card); box-shadow: 0 30px 80px rgba(0,0,0,0.5); }
+.gate-ring { width: 62px; height: 62px; margin: 0 auto 22px; border-radius: 50%; border: 1px solid var(--border-ember); display: grid; place-items: center; color: var(--spark); background: radial-gradient(circle at 50% 38%, rgba(255,217,160,0.14), rgba(7,9,12,0) 70%); box-shadow: 0 0 30px rgba(255,217,160,0.16); }
+.gate-ring [data-lucide], .gate-ring svg { width: 26px; height: 26px; stroke-width: 1.4; }
+.gate-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 14px; }
+.gate-title { font-size: 26px; letter-spacing: -0.02em; color: var(--text-strong); margin-bottom: 12px; }
+.gate-desc { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin-bottom: 26px; }
+.gate-form { display: flex; flex-direction: column; gap: 12px; }
+.gate-input { height: 50px; padding: 0 16px; border-radius: var(--radius-md); background: var(--ink-900); border: 1px solid var(--border-subtle); color: var(--text-strong); font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.08em; text-align: center; transition: var(--t-color), var(--t-glow); }
+.gate-input::placeholder { color: var(--text-faint); letter-spacing: 0.12em; }
+.gate-input:focus { outline: none; border-color: var(--border-ember); box-shadow: var(--glow-sm); }
+.gate-btn { height: 50px; justify-content: center; }
+.gate-error { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: #D2694A; min-height: 16px; opacity: 0; transition: opacity var(--dur-base) var(--ease-signal); }
+.gate-error.show { opacity: 1; }
+
+/* ---- Dossier content ---- */
+.dos { min-height: 100vh; padding: 56px 0 90px; }
+.dos-wrap { max-width: 760px; }
+.dos-back { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); text-decoration: none; }
+.dos-back:hover { color: var(--text-strong); }
+.dos-hero { padding: 26px 0 26px; border-bottom: 1px solid var(--border-hairline); }
+.dos-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 18px; }
+.dos-name { font-size: 46px; line-height: 1.05; letter-spacing: -0.03em; color: var(--text-strong); margin-bottom: 14px; }
+.dos-tagline { font-size: 22px; line-height: 1.4; letter-spacing: -0.01em; margin-bottom: 18px; max-width: 600px; background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.dos-lead { font-size: 17px; line-height: 1.7; color: var(--text-muted); max-width: 660px; }
+.dos-section { margin-top: 46px; }
+.dos-h2 { display: flex; align-items: baseline; gap: 14px; font-size: 24px; letter-spacing: -0.02em; color: var(--text-strong); margin-bottom: 20px; }
+.dos-num { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; color: var(--ember-400); font-weight: 400; }
+.dos-p { font-size: 17px; line-height: 1.7; color: var(--text-muted); margin-bottom: 16px; max-width: 660px; }
+
+.dos-timeline { list-style: none; position: relative; margin: 0; padding: 0; }
+.dos-timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 14px; width: 1px; background: linear-gradient(180deg, var(--border-ember), var(--border-hairline)); }
+.dos-exp { position: relative; display: grid; grid-template-columns: 116px 1fr; gap: 6px 24px; padding: 0 0 26px 30px; }
+.dos-exp::before { content: ""; position: absolute; left: 3px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--ink-900); border: 1px solid var(--ember-400); box-shadow: var(--glow-sm); }
+.dos-exp-period { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--text-faint); padding-top: 3px; }
+.dos-exp-role { font-size: 16px; color: var(--text-strong); margin: 0 0 4px; font-weight: 600; }
+.dos-exp-org { color: var(--ember-300); font-weight: 400; }
+.dos-exp-detail { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0; }
+
+.dos-chips { margin-top: 18px; }
+
+.dos-labs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.dos-lab { border: 1px solid var(--border-hairline); border-radius: var(--radius-lg); padding: 20px; background: var(--surface-card); transition: border-color var(--dur-base) var(--ease-signal), transform var(--dur-base) var(--ease-signal); }
+.dos-lab:hover { border-color: var(--border-ember); transform: translateY(-2px); }
+.dos-lab-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.dos-lab-meta { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ember-300); }
+.dos-lab-center { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--spark); border: 1px solid var(--border-ember); border-radius: var(--radius-pill); padding: 3px 10px; flex: none; }
+.dos-lab-title { font-size: 16px; color: var(--text-strong); margin: 0 0 8px; }
+.dos-lab-text { font-size: 14px; line-height: 1.55; color: var(--text-muted); margin: 0 0 14px; }
+.dos-lab-nodes { display: flex; flex-wrap: wrap; gap: 6px; }
+.dos-node { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--text-faint); border: 1px solid var(--border-hairline); border-radius: 999px; padding: 3px 9px; }
+
+.dos-facts { display: flex; flex-direction: column; gap: 10px; margin: 18px 0 0; }
+.dos-fact { display: flex; gap: 14px; font-size: 15px; }
+.dos-fact dt { flex: none; width: 130px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); padding-top: 2px; }
+.dos-fact dd { margin: 0; color: var(--text-muted); }
+
+.dos-contact { display: flex; flex-direction: column; gap: 10px; margin: 6px 0 22px; }
+.dos-contact-row { display: inline-flex; align-items: center; gap: 11px; font-family: var(--font-mono); font-size: 15px; color: var(--text-muted); text-decoration: none; width: fit-content; transition: var(--t-color); }
+.dos-contact-row [data-lucide], .dos-contact-row svg { width: 17px; height: 17px; color: var(--ember-400); stroke-width: 1.5; }
+.dos-contact-row:hover { color: var(--text-strong); }
+.dos-cta { margin-top: 8px; }
+.dos-cta .btn [data-lucide], .dos-cta .btn svg { width: 17px; height: 17px; }
+
+@media (max-width: 560px) {
+  .dos { padding: 44px 0 64px; }
+  .dos-name { font-size: 34px; }
+  .dos-tagline { font-size: 19px; }
+  .dos-h2 { font-size: 21px; }
+  .dos-exp { grid-template-columns: 1fr; gap: 3px; padding-left: 26px; }
+  .dos-exp-period { padding-top: 0; }
+  .dos-labs { grid-template-columns: 1fr; }
+  .dos-fact { flex-direction: column; gap: 2px; }
+  .dos-fact dt { width: auto; }
+  .gate-card { padding: 32px 22px; }
+}
