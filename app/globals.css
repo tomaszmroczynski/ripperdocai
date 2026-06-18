@@ -401,6 +401,10 @@ code, kbd, samp, pre {
   .nav-links { display: flex; gap: 30px; align-items: center; }
   .nav-links a { font-size: 14px; color: var(--text-muted); font-family: var(--font-body); }
   .nav-links a:hover { color: var(--text-strong); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border-hairline); border-radius: var(--radius-md); color: var(--ember-400); cursor: pointer; padding: 0; transition: var(--t-color); }
+  .nav-toggle:hover { border-color: var(--border-ember); color: var(--ember-300); }
+  .nav-toggle svg { width: 20px; height: 20px; }
   .btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border-radius: var(--radius-md); font-family: var(--font-display); font-weight: 600; font-size: 14px; cursor: pointer; border: 1px solid transparent; transition: var(--t-color), var(--t-glow); }
   .btn-primary { background: var(--action-primary); color: var(--text-on-ember); box-shadow: var(--glow-sm); }
   .btn-primary:hover { background: var(--action-primary-hover); box-shadow: var(--glow-md); }
@@ -503,8 +507,20 @@ code, kbd, samp, pre {
     .lockup { margin-top: 44px; }
     .manifesto, .atlas { grid-template-columns: 1fr; gap: 40px; }
     .pillars, .stats { grid-template-columns: 1fr; }
-    /* hide section links + CTA button, keep the language switcher (.lang is nested) */
-    .nav-links > a { display: none; }
+    /* section links + CTA collapse into a hamburger dropdown */
+    .nav-toggle { display: inline-flex; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      padding: 6px 0 12px;
+      background: rgba(7,9,12,0.97); backdrop-filter: var(--glass);
+      border-bottom: 1px solid var(--border-hairline);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 24px; font-size: 16px; }
+    .nav-links a.btn-ghost { margin: 12px 24px 4px; height: 46px; justify-content: center; }
     section.block { padding: 84px 0; }
     .sec-title { font-size: 38px; }
     .cta h2 { font-size: 40px; }
