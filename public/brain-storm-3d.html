@@ -3,47 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ripper Trinity — Brain Storm 3D (Ripperdoc)</title>
+<title>Ripper Trinity — Brain Storm 3D</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink-1000:#040506; --mist-300:#828D9C; --mist-100:#D2D8E0; --paper-50:#EEF1F5;
+    --ink-900:#07090C; --mist-300:#828D9C; --paper-50:#EEF1F5;
     --ember-300:#F1B86A; --ember-400:#EA9A3E; --ember-500:#DD7E27; --spark:#FFD9A0;
-    --border-hairline:rgba(255,255,255,.06); --border-ember:rgba(234,154,62,.42);
-    --glass:rgba(7,9,12,.55); --ease-signal:cubic-bezier(.22,.61,.36,1);
+    --ease-signal:cubic-bezier(.22,.61,.36,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden;background:#040506;color:var(--paper-50);font-family:"Geist",system-ui,sans-serif}
+  html,body{height:100%;overflow:hidden;background:var(--ink-900);color:var(--paper-50);font-family:"Geist",system-ui,sans-serif}
   #app{position:fixed;inset:0}
-  .hud{position:fixed;top:18px;left:20px;z-index:6;pointer-events:none}
-  .hud .eyebrow{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.34em;color:var(--mist-300);text-transform:uppercase}
-  .hud h1{font-size:18px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
-  .legend{position:fixed;left:0;right:0;bottom:42px;z-index:6;pointer-events:none;display:flex;justify-content:center;gap:26px;
-    font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.18em;color:var(--mist-300);text-transform:uppercase}
-  .legend span{display:inline-flex;align-items:center;gap:7px}
-  .legend i{width:7px;height:7px;border-radius:50%;display:inline-block}
-  .legend .e{background:var(--ember-400);box-shadow:0 0 8px var(--ember-400)}
-  .legend .s{background:var(--spark);box-shadow:0 0 10px var(--spark)}
+  /* idea labels rising from the convergence point */
+  #idea{position:fixed;left:50%;top:50%;z-index:5;pointer-events:none;
+    font-family:"Geist Mono",monospace;font-weight:500;letter-spacing:.04em;white-space:nowrap;
+    font-size:clamp(20px,3.4vw,38px);color:var(--spark);text-shadow:0 0 26px rgba(255,217,160,.45);opacity:0}
+  @keyframes ideaGrow{
+    0%{opacity:0;transform:translate(-50%,-50%) scale(.35)}
+    16%{opacity:1}
+    66%{opacity:1}
+    100%{opacity:0;transform:translate(-50%,-50%) scale(1.85)}
+  }
+  #idea.run{animation:ideaGrow 4.4s var(--ease-signal) forwards}
   .help{position:fixed;bottom:16px;left:0;right:0;text-align:center;z-index:6;pointer-events:none;
     font-family:"Geist Mono",monospace;font-size:9px;letter-spacing:.18em;color:var(--mist-300);text-transform:uppercase}
   .help b{color:var(--ember-300);font-weight:400}
-  #lang{position:fixed;top:16px;right:16px;z-index:7;display:flex;gap:2px;border:1px solid var(--border-hairline);border-radius:999px;padding:3px;background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-  #lang button{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist-300);background:transparent;border:0;cursor:pointer;padding:5px 8px;border-radius:999px}
-  #lang button.active{color:var(--ink-1000);background:var(--ember-500)}
   #err{position:fixed;top:0;left:0;right:0;z-index:99;background:#20100c;color:#F6D29A;font:12px monospace;padding:8px;white-space:pre-wrap;display:none}
-  @media (max-width:560px){ .hud{top:14px;left:14px} .hud h1{font-size:16px} .legend{gap:16px;font-size:9px} }
+  @media (prefers-reduced-motion:reduce){#idea.run{animation:none;opacity:1;transform:translate(-50%,-50%) scale(1)}}
 </style>
 </head>
 <body>
 <div id="err"></div>
 <div id="app"></div>
-<div class="hud"><div class="eyebrow">Ripper Trinity</div><h1 id="title">Burza mózgów</h1></div>
-<div id="lang"><button data-l="no">NO</button><button data-l="en">EN</button><button data-l="pl">PL</button></div>
-<div class="legend">
-  <span><i class="e"></i><b id="lgL">STRUKTURA</b></span>
-  <span><i class="s"></i><b id="lgC">CZŁOWIEK</b></span>
-  <span><i class="e"></i><b id="lgR">KRYTYKA</b></span>
-</div>
+<div id="idea"></div>
 <div class="help" id="help">Przeciągnij, aby obrócić · <b>kursor</b> rozprasza węzły</div>
 
 <script type="importmap">
@@ -57,42 +49,36 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const I18N = {
-  no: { title:'Idémyldring', L:'STRUKTUR', C:'MENNESKE', R:'KRITIKK', help:'Dra for å rotere · <b>markøren</b> sprer nodene' },
-  en: { title:'Brainstorm',   L:'STRUCTURE', C:'HUMAN',  R:'CRITIQUE', help:'Drag to rotate · the <b>cursor</b> scatters the nodes' },
-  pl: { title:'Burza mózgów', L:'STRUKTURA', C:'CZŁOWIEK', R:'KRYTYKA', help:'Przeciągnij, aby obrócić · <b>kursor</b> rozprasza węzły' }
+  no: { help:'Dra for å rotere · <b>markøren</b> sprer nodene',
+        ideas:['forretningsstrategier','strategiske disposisjoner','beslutninger med høy innsats','utrullingsplaner','beslutningsarkitekturer','risikoscenarier'] },
+  en: { help:'Drag to rotate · the <b>cursor</b> scatters the nodes',
+        ideas:['business strategies','strategic outlines','high-stakes decisions','rollout plans','decision architectures','risk scenarios'] },
+  pl: { help:'Przeciągnij, aby obrócić · <b>kursor</b> rozprasza węzły',
+        ideas:['strategie biznesowe','konspekty strategiczne','decyzje wysokiej stawki','plany wdrożeniowe','architektury decyzji','scenariusze ryzyka'] }
 };
 const params = new URLSearchParams(location.search);
 let lang = params.get('lang'); if(!I18N[lang]) lang='no';
-function applyLang(l){
-  lang=l; const t=I18N[l];
-  document.getElementById('title').textContent=t.title;
-  document.getElementById('lgL').textContent=t.L;
-  document.getElementById('lgC').textContent=t.C;
-  document.getElementById('lgR').textContent=t.R;
-  document.getElementById('help').innerHTML=t.help;
-  document.documentElement.lang=l;
-  document.querySelectorAll('#lang button').forEach(b=>b.classList.toggle('active', b.dataset.l===l));
-}
-document.querySelectorAll('#lang button').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.l)));
-applyLang(lang);
+const T = I18N[lang];
+document.documentElement.lang = lang;
+document.getElementById('help').innerHTML = T.help;
 
 const err=document.getElementById('err');
 function fail(m){ err.style.display='block'; err.textContent='⚠ '+m; }
 window.addEventListener('error', e=>fail(e.message||'error'));
 
-const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x040506,0.10);
+const BG = 0x07090C;
+const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(BG,0.085);
 const camera=new THREE.PerspectiveCamera(55, innerWidth/innerHeight, 0.05, 100);
-camera.position.set(0,0.1,4.4);
+camera.position.set(0,0.05,5.0);
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
 renderer.setSize(innerWidth,innerHeight);
 document.getElementById('app').appendChild(renderer.domElement);
 const controls=new OrbitControls(camera,renderer.domElement);
-controls.enableDamping=true; controls.dampingFactor=0.08;
-controls.enablePan=false; controls.minDistance=2.6; controls.maxDistance=7;
-controls.autoRotate=false;
+controls.enableDamping=true; controls.dampingFactor=0.08; controls.enablePan=false;
+controls.minDistance=3.0; controls.maxDistance=8; controls.autoRotate=false;
 
-const EMBER=new THREE.Color(0xF1B86A), SPARK=new THREE.Color(0xFFD9A0);
+const EMBER=new THREE.Color(0xF1B86A);
 
 function sprite(){
   const c=document.createElement('canvas'); c.width=c.height=64; const g=c.getContext('2d');
@@ -114,100 +100,101 @@ void main(){ vec4 mv=modelViewMatrix*vec4(position,1.0);
 const pFrag=`uniform sampler2D uTex; uniform vec3 uBase;
 void main(){ vec4 t=texture2D(uTex,gl_PointCoord); if(t.a<0.04) discard; gl_FragColor=vec4(uBase, t.a*0.9); }`;
 
-function makeUniforms(){ return {
-  uTex:{value:TEX}, uSize:{value:0.020}, uScale:{value:innerHeight*Math.min(devicePixelRatio,2)*0.5},
-  uMouse:{value:new THREE.Vector2(-2,-2)}, uPushR:{value:0.16}, uPush:{value:0.05}, uAspect:{value:innerWidth/innerHeight},
-  uBase:{value:EMBER.clone()} }; }
-const uniL=makeUniforms(), uniR=makeUniforms();
+const uni={
+  uTex:{value:TEX}, uSize:{value:0.019}, uScale:{value:innerHeight*Math.min(devicePixelRatio,2)*0.5},
+  uMouse:{value:new THREE.Vector2(-2,-2)}, uPushR:{value:0.15}, uPush:{value:0.05}, uAspect:{value:innerWidth/innerHeight},
+  uBase:{value:EMBER.clone()}
+};
+const pMat=new THREE.ShaderMaterial({uniforms:uni,vertexShader:pVert,fragmentShader:pFrag,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
 
-const OFF=1.35, SC=0.92;
-const anchorsL=[], anchorsR=[]; // inner-edge world points for lightning
+// three minds around the centre (triangle), lightning converges to origin
+const BR = [ {x:0,y:1.45}, {x:-1.32,y:-0.8}, {x:1.32,y:-0.8} ];
+const SC = 0.6;
+const anchors=[];
+const CENTER=new THREE.Vector3(0,0,0);
 
 fetch('/assets/data/brain.json').then(r=>r.json()).then(flat=>{
-  const n=flat.length/3;
-  const arr=new Float32Array(flat);
+  const arr=new Float32Array(flat); const n=arr.length/3;
   const geo=new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(arr,3));
-  const matL=new THREE.ShaderMaterial({uniforms:uniL,vertexShader:pVert,fragmentShader:pFrag,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
-  const matR=new THREE.ShaderMaterial({uniforms:uniR,vertexShader:pVert,fragmentShader:pFrag,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
-  const left=new THREE.Points(geo,matL); left.position.x=-OFF; left.scale.set(SC,SC,SC);
-  const right=new THREE.Points(geo,matR); right.position.x=OFF; right.scale.set(-SC,SC,SC);
-  group.add(left,right);
-  // inner-edge anchors (local x large = facing centre)
-  for(let i=0;i<n;i++){
-    const x=arr[i*3], y=arr[i*3+1], z=arr[i*3+2];
-    if(x>0.35 && Math.random()<0.5){
-      anchorsL.push(new THREE.Vector3(x*SC-OFF, y*SC, z*SC));
-      anchorsR.push(new THREE.Vector3(-x*SC+OFF, y*SC, z*SC));
+  BR.forEach((b,bi)=>{
+    const pts=new THREE.Points(geo,pMat);
+    pts.position.set(b.x,b.y,0); pts.scale.set(bi===2?-SC:SC, SC, SC);
+    group.add(pts);
+    // collect inner-facing anchors (points nearest the centre) in world space
+    const cand=[];
+    for(let i=0;i<n;i++){
+      const wx=arr[i*3]*(bi===2?-SC:SC)+b.x, wy=arr[i*3+1]*SC+b.y, wz=arr[i*3+2]*SC;
+      cand.push([wx,wy,wz, wx*wx+wy*wy]); // dist² to centre (z small)
     }
-  }
+    cand.sort((p,q)=>p[3]-q[3]);
+    for(let i=0;i<60;i++){ const c=cand[i]; anchors.push(new THREE.Vector3(c[0],c[1],c[2])); }
+  });
 }).catch(e=>fail('brain.json: '+e.message));
 
-// ---- centre human node ----
+// centre convergence node
 const core=new THREE.Group(); scene.add(core);
-const coreGlowTex=sprite();
-const coreSprite=new THREE.Sprite(new THREE.SpriteMaterial({map:coreGlowTex,color:0xFFD9A0,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
-coreSprite.scale.set(1.5,1.5,1.5); core.add(coreSprite);
-const coreDot=new THREE.Mesh(new THREE.SphereGeometry(0.07,20,20), new THREE.MeshBasicMaterial({color:0xFFF3DF}));
-core.add(coreDot);
+const coreSprite=new THREE.Sprite(new THREE.SpriteMaterial({map:sprite(),color:0xFFD9A0,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));
+coreSprite.scale.set(1.4,1.4,1.4); core.add(coreSprite);
+core.add(new THREE.Mesh(new THREE.SphereGeometry(0.06,18,18), new THREE.MeshBasicMaterial({color:0xFFF3DF})));
 
-// ---- lightning pool ----
-const BOLTS=6, bolts=[];
-const boltMat=()=>new THREE.LineBasicMaterial({color:0xFFD9A0,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+// lightning pool (infrequent)
+const BOLTS=4, bolts=[];
 for(let i=0;i<BOLTS;i++){
   const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(13*3),3));
-  const l=new THREE.Line(g, boltMat()); l.frustumCulled=false; scene.add(l);
-  bolts.push({line:l, t0:-99, life:0.0});
+  const l=new THREE.Line(g, new THREE.LineBasicMaterial({color:0xFFD9A0,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  l.frustumCulled=false; scene.add(l);
+  bolts.push({line:l, t0:-1, life:0, next:Math.random()*1.5});
 }
-const CENTER=new THREE.Vector3(0,0,0);
 function jag(a,b){
   const segs=12, out=new Float32Array((segs+1)*3);
   for(let i=0;i<=segs;i++){ const t=i/segs;
     let x=a.x+(b.x-a.x)*t, y=a.y+(b.y-a.y)*t, z=a.z+(b.z-a.z)*t;
-    if(i>0&&i<segs){ const j=0.26*(1-Math.abs(0.5-t)*2)+0.04; x+=(Math.random()-0.5)*j; y+=(Math.random()-0.5)*j; z+=(Math.random()-0.5)*j; }
+    if(i>0&&i<segs){ const j=0.24*(1-Math.abs(0.5-t)*2)+0.04; x+=(Math.random()-0.5)*j; y+=(Math.random()-0.5)*j; z+=(Math.random()-0.5)*j; }
     out[i*3]=x; out[i*3+1]=y; out[i*3+2]=z;
   }
   return out;
 }
-function regen(b,now){
-  if(!anchorsL.length||!anchorsR.length) return;
-  const roll=Math.random();
-  let a,c;
-  if(roll<0.4){ a=anchorsL[(Math.random()*anchorsL.length)|0]; c=CENTER; }
-  else if(roll<0.8){ a=anchorsR[(Math.random()*anchorsR.length)|0]; c=CENTER; }
-  else { a=anchorsL[(Math.random()*anchorsL.length)|0]; c=anchorsR[(Math.random()*anchorsR.length)|0]; }
-  const pos=jag(a,c);
+function fire(b,now){
+  if(!anchors.length) return;
+  const a=anchors[(Math.random()*anchors.length)|0];
+  const pos=jag(a,CENTER);
   const attr=b.line.geometry.attributes.position;
-  attr.array.set(pos); attr.needsUpdate=true;
-  b.line.geometry.setDrawRange(0,pos.length/3);
-  b.t0=now; b.life=0.28+Math.random()*0.5;
+  attr.array.set(pos); attr.needsUpdate=true; b.line.geometry.setDrawRange(0,pos.length/3);
+  b.t0=now; b.life=0.32+Math.random()*0.4;
   b.line.material.color.setHex(Math.random()<0.5?0xFFD9A0:0xEA9A3E);
 }
 
-// ---- cursor repulsion ----
+// idea labels cycling from the centre
+const ideaEl=document.getElementById('idea');
+let ii=0;
+function nextIdea(){
+  ideaEl.textContent=T.ideas[ii%T.ideas.length]; ii++;
+  ideaEl.classList.remove('run'); void ideaEl.offsetWidth; ideaEl.classList.add('run');
+}
+ideaEl.addEventListener('animationend',()=>{ setTimeout(nextIdea, 450); });
+nextIdea();
+
 const pointer=new THREE.Vector2(-2,-2);
 addEventListener('pointermove',e=>{ pointer.x=(e.clientX/innerWidth)*2-1; pointer.y=-(e.clientY/innerHeight)*2+1; });
-
 addEventListener('resize',()=>{
   camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
   renderer.setSize(innerWidth,innerHeight);
-  [uniL,uniR].forEach(u=>{ u.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5; u.uAspect.value=innerWidth/innerHeight; });
+  uni.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5; uni.uAspect.value=innerWidth/innerHeight;
 });
 
 const clock=new THREE.Clock();
 renderer.setAnimationLoop(()=>{
   const t=clock.getElapsedTime(), now=t;
-  [uniL,uniR].forEach(u=>u.uMouse.value.copy(pointer));
-  group.rotation.y=Math.sin(t*0.12)*0.28;
-  group.rotation.x=Math.sin(t*0.08)*0.06;
-  // core breathing
-  const pulse=0.5+0.5*Math.sin(t*1.6);
-  coreSprite.scale.setScalar(1.35+pulse*0.5);
-  coreSprite.material.opacity=0.5+pulse*0.4;
-  // lightning
+  uni.uMouse.value.copy(pointer);
+  group.rotation.y=Math.sin(t*0.11)*0.26;
+  group.rotation.x=Math.sin(t*0.07)*0.05;
+  const pulse=0.5+0.5*Math.sin(t*1.5);
+  coreSprite.scale.setScalar(1.25+pulse*0.5); coreSprite.material.opacity=0.5+pulse*0.4;
   for(const b of bolts){
+    if(b.t0<0){ if(now>b.next) fire(b,now); continue; }
     const age=now-b.t0;
-    if(age>b.life) regen(b,now);
-    else { const k=age/b.life; const flick=(0.6+0.4*Math.sin(now*40+b.t0))*Math.sin(Math.PI*k); b.line.material.opacity=Math.max(0,flick); }
+    if(age>b.life){ b.t0=-1; b.next=now+0.5+Math.random()*1.8; b.line.material.opacity=0; }
+    else { const k=age/b.life; b.line.material.opacity=Math.max(0,(0.55+0.45*Math.sin(now*38))*Math.sin(Math.PI*k)); }
   }
   controls.update();
   renderer.render(scene,camera);
