@@ -791,11 +791,11 @@ a.scan-preview { text-decoration: none; }
 .eco-lead { font-size: 18px; line-height: 1.65; color: var(--text-muted); max-width: 720px; margin-bottom: 16px; }
 .eco-lockup { font-family: var(--font-display); font-weight: 300; font-size: 13px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mist-300); margin: 22px 0 8px; }
 .eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
-.eco-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 28px 26px; border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); background: var(--surface-card); background-image: var(--grad-card); text-decoration: none; transition: border-color var(--dur-base) var(--ease-signal), transform var(--dur-base) var(--ease-signal), box-shadow var(--dur-base) var(--ease-signal); }
-.eco-card.is-link:hover { border-color: var(--border-ember); transform: translateY(-3px); box-shadow: var(--glow-sm); }
-.eco-card.is-soon { opacity: 0.82; }
-.eco-ic { width: 50px; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border-hairline); display: grid; place-items: center; margin-bottom: 20px; color: var(--ember-300); background: var(--ink-700); }
-.eco-ic [data-lucide], .eco-ic svg { width: 23px; height: 23px; stroke-width: 1.5; }
+.eco-card { position: relative; display: flex; align-items: flex-end; aspect-ratio: 2 / 3; padding: 0; border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); overflow: hidden; background-color: var(--ink-1000); background-size: cover; background-position: center; text-decoration: none; transition: border-color var(--dur-base) var(--ease-signal), transform var(--dur-base) var(--ease-signal), box-shadow var(--dur-base) var(--ease-signal); }
+.eco-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,12,0) 30%, rgba(7,9,12,0.55) 60%, rgba(7,9,12,0.95) 100%); z-index: 0; }
+.eco-card.is-link:hover { border-color: var(--border-ember); transform: translateY(-3px); box-shadow: 0 30px 70px -40px rgba(0,0,0,0.8); }
+.eco-card.is-soon { opacity: 0.92; }
+.eco-card-body { position: relative; z-index: 1; width: 100%; padding: 22px 22px 24px; }
 .eco-level { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 8px; }
 .eco-name { font-size: 22px; letter-spacing: -0.02em; color: var(--text-strong); margin-bottom: 10px; }
 .eco-line { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px; }

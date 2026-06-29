@@ -64,6 +64,12 @@ const UI: Record<string, Eco> = {
   }
 };
 
+const IMG: Record<string, string> = {
+  RipperSync: '/assets/img/ripper-sync.png',
+  'Ripper Trinity': '/assets/img/ripper-trinity.png',
+  'Ripper Task Force': '/assets/img/ripper-task-force.png'
+};
+
 export async function generateMetadata({
   params
 }: {
@@ -106,10 +112,7 @@ export default async function EkosystemPage({
         <div className="eco-grid">
           {u.cards.map((c) => {
             const body = (
-              <>
-                <div className="eco-ic">
-                  <i data-lucide={c.icon} />
-                </div>
+              <div className="eco-card-body">
                 <div className="eco-level">{c.level}</div>
                 <h2 className="eco-name">{c.name}</h2>
                 <p className="eco-line">{c.line}</p>
@@ -117,14 +120,15 @@ export default async function EkosystemPage({
                   <span className="eco-status">{c.status}</span>
                   {c.href && <span className="eco-go">{c.cta} →</span>}
                 </div>
-              </>
+              </div>
             );
+            const style = { backgroundImage: `url(${IMG[c.name] ?? ''})` };
             return c.href ? (
-              <Link key={c.name} className="eco-card is-link" href={`/${lang}/${c.href}`}>
+              <Link key={c.name} className="eco-card is-link" href={`/${lang}/${c.href}`} style={style}>
                 {body}
               </Link>
             ) : (
-              <article key={c.name} className="eco-card is-soon">
+              <article key={c.name} className="eco-card is-soon" style={style}>
                 {body}
               </article>
             );

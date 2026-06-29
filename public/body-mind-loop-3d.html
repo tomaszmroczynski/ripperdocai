@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RipperSync — ciało → umysł (interaktywny mózg)</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink-900:#07090C; --mist-300:#828D9C; --mist-100:#D2D8E0; --paper-50:#EEF1F5;
+    --ember-300:#F1B86A; --ember-400:#EA9A3E; --spark:#FFD9A0; --border-hairline:rgba(255,255,255,.07);
+    --border-ember:rgba(234,154,62,.42); --glass:rgba(7,9,12,.6); --ease-signal:cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:var(--ink-900);color:var(--paper-50);font-family:"Geist",system-ui,sans-serif}
+  #app{position:fixed;inset:0}
+  .eyebrow{position:fixed;top:16px;left:18px;z-index:6;font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist-300);display:flex;align-items:center;gap:8px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--ember-400);box-shadow:0 0 10px var(--ember-400)}
+  /* legend (regions) */
+  #legend{position:fixed;top:46px;right:16px;z-index:7;display:flex;flex-direction:column;gap:4px}
+  .leg{display:flex;align-items:center;gap:9px;padding:8px 11px;border:1px solid var(--border-hairline);border-radius:10px;background:var(--glass);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);cursor:pointer;font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--mist-100);transition:all .2s var(--ease-signal)}
+  .leg .d{width:8px;height:8px;border-radius:50%;background:var(--ember-400);flex:none;transition:all .2s var(--ease-signal)}
+  .leg:hover,.leg.on{border-color:var(--border-ember);color:var(--paper-50)}
+  .leg.on .d{background:var(--spark);box-shadow:0 0 10px var(--spark)}
+  /* explanation panel */
+  #panel{position:fixed;left:16px;bottom:16px;z-index:7;width:min(340px,80vw);border:1px solid var(--border-hairline);border-radius:14px;background:var(--glass);
+    -webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);padding:16px 18px;transition:border-color .25s var(--ease-signal)}
+  #panel.on{border-color:var(--border-ember)}
+  #panel .k{font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ember-300);margin-bottom:7px}
+  #panel .t{font-size:14.5px;line-height:1.55;color:var(--mist-100)}
+  #panel .hint{color:var(--mist-300);font-style:normal}
+  .help{position:fixed;bottom:14px;left:0;right:0;text-align:center;z-index:6;pointer-events:none;font-family:"Geist Mono",monospace;font-size:9px;letter-spacing:.18em;color:var(--mist-300);text-transform:uppercase}
+  .help b{color:var(--ember-300);font-weight:400}
+  #err{position:fixed;top:0;left:0;right:0;z-index:99;background:#20100c;color:#F6D29A;font:12px monospace;padding:8px;white-space:pre-wrap;display:none}
+  @media(max-width:560px){#panel{left:8px;right:8px;width:auto;bottom:8px}.leg{font-size:10px;padding:7px 9px}#legend{top:40px;right:8px}.help{display:none}}
+</style>
+</head>
+<body>
+<div id="err"></div>
+<div id="app"></div>
+<div class="eyebrow"><span class="dot"></span><span id="eb">Pętla: ciało → umysł</span></div>
+<div id="legend"></div>
+<div id="panel"><div class="k" id="pk"></div><div class="t hint" id="pt"></div></div>
+<div class="help" id="help"></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const REGIONS = ['bdnf','dopa','sleep','recovery'];
+const I18N = {
+  no: { eb:'Løkke: kropp → sinn', help:'Dra for å rotere · scroll for zoom · hold over et område', hint:'Hold over et hjerneområde eller en etikett.',
+    r:{ bdnf:['BDNF · nevroplastisitet','Fysisk aktivitet øker BDNF — hjernen danner og styrker forbindelser lettere (læring, hukommelse).'],
+        dopa:['Dopamin · serotonin','Bevegelse påvirker dopamin og serotonin — motivasjon, humør og oppmerksomhet.'],
+        sleep:['Søvn','Etter god innsats går kroppen lettere inn i dyp søvn — hjernen ordner minner og følelser.'],
+        recovery:['Restitusjon','Regulering av kortisol og restitusjon av nervesystemet — gjenvinning av handlekraft.'] } },
+  en: { eb:'Loop: body → mind', help:'Drag to rotate · scroll to zoom · hover a region', hint:'Hover a brain region or a label.',
+    r:{ bdnf:['BDNF · neuroplasticity','Physical activity raises BDNF — the brain forms and strengthens connections more easily (learning, memory).'],
+        dopa:['Dopamine · serotonin','Movement affects dopamine and serotonin — motivation, mood and attention.'],
+        sleep:['Sleep','After good effort the body enters deep sleep more easily — the brain orders memories and emotions.'],
+        recovery:['Recovery','Cortisol regulation and recovery of the nervous system — readiness returns.'] } },
+  pl: { eb:'Pętla: ciało → umysł', help:'Przeciągnij, aby obrócić · scroll = zoom · najedź na obszar', hint:'Najedź na obszar mózgu albo etykietę.',
+    r:{ bdnf:['BDNF · neuroplastyczność','Aktywność fizyczna zwiększa BDNF — mózg łatwiej tworzy i wzmacnia połączenia (uczenie, pamięć).'],
+        dopa:['Dopamina · serotonina','Ruch wpływa na dopaminę i serotoninę — motywacja, nastrój i uwaga.'],
+        sleep:['Sen','Po dobrym wysiłku organizm łatwiej wchodzi w głęboki sen — mózg porządkuje wspomnienia i emocje.'],
+        recovery:['Regeneracja','Regulacja kortyzolu i regeneracja układu nerwowego — powrót gotowości.'] } }
+};
+const params=new URLSearchParams(location.search); let lang=params.get('lang'); if(!I18N[lang]) lang='no';
+const T=I18N[lang]; document.documentElement.lang=lang;
+document.getElementById('eb').textContent=T.eb;
+document.getElementById('help').innerHTML=T.help;
+const pk=document.getElementById('pk'), pt=document.getElementById('pt'), panel=document.getElementById('panel');
+function showRegion(id){
+  if(!id){ pk.textContent=''; pt.textContent=T.hint; pt.classList.add('hint'); panel.classList.remove('on');
+    document.querySelectorAll('.leg').forEach(l=>l.classList.remove('on')); return; }
+  const r=T.r[id]; pk.textContent=r[0]; pt.textContent=r[1]; pt.classList.remove('hint'); panel.classList.add('on');
+  document.querySelectorAll('.leg').forEach(l=>l.classList.toggle('on', l.dataset.r===id));
+}
+// legend
+const legend=document.getElementById('legend');
+REGIONS.forEach(id=>{
+  const el=document.createElement('div'); el.className='leg'; el.dataset.r=id;
+  el.innerHTML=`<span class="d"></span>${T.r[id][0].split(' · ')[0]}`;
+  el.addEventListener('mouseenter',()=>{lock=id; setActive(id);});
+  el.addEventListener('mouseleave',()=>{lock=null; setActive(null);});
+  el.addEventListener('click',()=>{lock=id; setActive(id);});
+  legend.appendChild(el);
+});
+
+const err=document.getElementById('err');
+function fail(m){err.style.display='block';err.textContent='⚠ '+m;}
+window.addEventListener('error',e=>fail(e.message||'error'));
+
+const BG=0x07090C;
+const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(BG,0.075);
+const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,0.05,100); camera.position.set(0,0.3,4.9);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight);
+document.getElementById('app').appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true; controls.dampingFactor=0.08; controls.enablePan=false;
+controls.minDistance=2.8; controls.maxDistance=8; controls.target.set(0,0.35,0); controls.autoRotate=true; controls.autoRotateSpeed=0.5;
+
+function sprite(){const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d');
+  const gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.3,'rgba(255,255,255,.65)');gr.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=gr;g.fillRect(0,0,64,64);return new THREE.CanvasTexture(c);}
+const TEX=sprite();
+
+const shared={ uTex:{value:TEX}, uScale:{value:innerHeight*Math.min(devicePixelRatio,2)*0.5},
+  uMouse:{value:new THREE.Vector2(-2,-2)}, uAspect:{value:innerWidth/innerHeight} };
+const pVert=`uniform float uSize; uniform float uScale; uniform vec2 uMouse; uniform float uPushR; uniform float uPush; uniform float uAspect;
+void main(){ vec4 mv=modelViewMatrix*vec4(position,1.0);
+  vec4 clip=projectionMatrix*mv; vec2 ndc=clip.xy/clip.w;
+  vec2 d=ndc-uMouse; d.x*=uAspect; float dist=length(d);
+  float f=smoothstep(uPushR,0.0,dist);
+  if(f>0.0){ vec2 dir=dist>1e-4?normalize(d):vec2(0.0); dir.x/=uAspect; mv.xy+=dir*f*uPush*(-mv.z); }
+  gl_PointSize=uSize*uScale/(-mv.z); gl_Position=projectionMatrix*mv; }`;
+const pFrag=`uniform sampler2D uTex; uniform vec3 uBase; uniform float uOp;
+void main(){ vec4 t=texture2D(uTex,gl_PointCoord); if(t.a<0.04) discard; gl_FragColor=vec4(uBase, t.a*uOp); }`;
+function makeMat(hex,size,op){ return new THREE.ShaderMaterial({uniforms:Object.assign({},shared,{
+  uSize:{value:size}, uPushR:{value:0.15}, uPush:{value:0.04}, uBase:{value:new THREE.Color(hex)}, uOp:{value:op} }),
+  vertexShader:pVert, fragmentShader:pFrag, transparent:true, depthWrite:false, blending:THREE.AdditiveBlending }); }
+
+const brain=new THREE.Group(); brain.position.set(0,0.55,0); brain.scale.setScalar(0.72); scene.add(brain);
+const heart=new THREE.Group(); heart.position.set(0,-1.35,0); heart.scale.setScalar(0.42); scene.add(heart);
+
+// region anchors in brain-local space
+const ANCH={ bdnf:new THREE.Vector3(-0.45,0.05,0.25), dopa:new THREE.Vector3(0.46,0.08,0.12),
+  sleep:new THREE.Vector3(0.0,-0.5,-0.3), recovery:new THREE.Vector3(0.0,0.52,-0.18) };
+const RAD=0.5;
+const regionMats={}; const markerMats={}; let active=null, lock=null;
+
+fetch('/assets/data/brain.json').then(r=>r.json()).then(flat=>{
+  const arr=new Float32Array(flat); const n=arr.length/3;
+  const buckets={base:[]}; REGIONS.forEach(id=>buckets[id]=[]);
+  for(let i=0;i<n;i++){
+    const x=arr[i*3],y=arr[i*3+1],z=arr[i*3+2]; let best=null,bd=RAD*RAD;
+    for(const id of REGIONS){const a=ANCH[id];const dx=x-a.x,dy=y-a.y,dz=z-a.z,dd=dx*dx+dy*dy+dz*dz; if(dd<bd){bd=dd;best=id;}}
+    (best?buckets[best]:buckets.base).push(x,y,z);
+  }
+  const baseMat=makeMat(0x9A5A22,0.016,0.85); brain.add(new THREE.Points(geoOf(buckets.base),baseMat));
+  REGIONS.forEach(id=>{ const m=makeMat(0xF1B86A,0.02,0.95); regionMats[id]=m; brain.add(new THREE.Points(geoOf(buckets[id]),m)); });
+  // markers + raycast spheres
+  REGIONS.forEach(id=>{
+    const a=ANCH[id];
+    const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:TEX,color:0xFFD9A0,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,opacity:0.0}));
+    sp.scale.setScalar(0.55); sp.position.copy(a); markerMats[id]=sp; brain.add(sp);
+    const hit=new THREE.Mesh(new THREE.SphereGeometry(RAD*0.92,12,12), new THREE.MeshBasicMaterial({visible:false}));
+    hit.position.copy(a); hit.userData.region=id; brain.add(hit); pickables.push(hit);
+  });
+}).catch(e=>fail('brain.json: '+e.message));
+function geoOf(a){const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(a),3)); return g;}
+
+fetch('/assets/data/heart.json').then(r=>r.json()).then(flat=>{
+  heart.add(new THREE.Points(geoOf(flat), makeMat(0xEA9A3E,0.02,0.9)));
+}).catch(e=>fail('heart.json: '+e.message));
+
+// rising flow particles heart -> brain
+const M=60, fp=new Float32Array(M*3), fprog=new Float32Array(M);
+for(let i=0;i<M;i++){ fprog[i]=Math.random(); }
+const fGeo=new THREE.BufferGeometry(); fGeo.setAttribute('position',new THREE.BufferAttribute(fp,3));
+const flow=new THREE.Points(fGeo,new THREE.PointsMaterial({size:0.06,map:TEX,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,color:0xFFD9A0,sizeAttenuation:true}));
+scene.add(flow);
+const HY=-1.25, BY=0.45;
+function updFlow(t){
+  for(let i=0;i<M;i++){ fprog[i]+=0.0042; if(fprog[i]>1)fprog[i]-=1; const p=fprog[i];
+    fp[i*3]=Math.sin(i*1.7+p*6.28)*0.12*(1-p); fp[i*3+1]=HY+(BY-HY)*p; fp[i*3+2]=Math.cos(i*2.3+p*6.28)*0.12*(1-p); }
+  fGeo.attributes.position.needsUpdate=true;
+}
+
+// picking
+const ray=new THREE.Raycaster(), pointer=new THREE.Vector2(-2,-2), pickables=[];
+function setActive(id){ active=id; showRegion(id); }
+addEventListener('pointermove',e=>{
+  pointer.x=(e.clientX/innerWidth)*2-1; pointer.y=-(e.clientY/innerHeight)*2+1;
+  shared.uMouse.value.set(pointer.x,pointer.y);
+  if(lock) return;
+  ray.setFromCamera(pointer,camera); const hit=ray.intersectObjects(pickables,false);
+  setActive(hit.length? hit[0].object.userData.region : null);
+});
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);
+  shared.uScale.value=innerHeight*Math.min(devicePixelRatio,2)*0.5; shared.uAspect.value=innerWidth/innerHeight;});
+showRegion(null);
+
+function heartbeat(t){const p=(t%1.05)/1.05; return Math.exp(-((p-0.02)**2)/0.0016)+0.55*Math.exp(-((p-0.20)**2)/0.0020);}
+const clock=new THREE.Clock();
+renderer.setAnimationLoop(()=>{
+  const t=clock.getElapsedTime();
+  updFlow(t);
+  heart.scale.setScalar(0.42*(1+0.07*heartbeat(t)));
+  const pulse=0.5+0.5*Math.sin(t*4);
+  REGIONS.forEach(id=>{
+    const m=regionMats[id], sp=markerMats[id]; if(!m) return;
+    if(id===active){ m.uniforms.uBase.value.setHex(0xFFD9A0); m.uniforms.uSize.value=0.034; if(sp){sp.material.opacity=0.5+0.4*pulse; sp.scale.setScalar(0.5+0.18*pulse);} }
+    else { m.uniforms.uBase.value.setHex(0xF1B86A); m.uniforms.uSize.value=0.02; if(sp){sp.material.opacity=0.0;} }
+  });
+  controls.autoRotate = !active && !lock;
+  controls.update();
+  renderer.render(scene,camera);
+});
+</script>
+</body>
+</html>
