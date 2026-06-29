@@ -781,3 +781,27 @@ a.scan-preview { text-decoration: none; }
   .dos-fact dt { width: auto; }
   .gate-card { padding: 32px 22px; }
 }
+
+/* ============================================================
+   Ecosystem hub (/ekosystem)
+   ============================================================ */
+.eco { min-height: 100vh; padding: 56px 0 90px; }
+.eco .wrap { max-width: 1080px; }
+.eco-title { font-size: 48px; line-height: 1.05; letter-spacing: -0.03em; color: var(--text-strong); margin: 16px 0 22px; max-width: 760px; }
+.eco-lead { font-size: 18px; line-height: 1.65; color: var(--text-muted); max-width: 720px; margin-bottom: 16px; }
+.eco-lockup { font-family: var(--font-display); font-weight: 300; font-size: 13px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--mist-300); margin: 22px 0 8px; }
+.eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+.eco-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 28px 26px; border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); background: var(--surface-card); background-image: var(--grad-card); text-decoration: none; transition: border-color var(--dur-base) var(--ease-signal), transform var(--dur-base) var(--ease-signal), box-shadow var(--dur-base) var(--ease-signal); }
+.eco-card.is-link:hover { border-color: var(--border-ember); transform: translateY(-3px); box-shadow: var(--glow-sm); }
+.eco-card.is-soon { opacity: 0.82; }
+.eco-ic { width: 50px; height: 50px; border-radius: var(--radius-md); border: 1px solid var(--border-hairline); display: grid; place-items: center; margin-bottom: 20px; color: var(--ember-300); background: var(--ink-700); }
+.eco-ic [data-lucide], .eco-ic svg { width: 23px; height: 23px; stroke-width: 1.5; }
+.eco-level { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 8px; }
+.eco-name { font-size: 22px; letter-spacing: -0.02em; color: var(--text-strong); margin-bottom: 10px; }
+.eco-line { font-size: 14.5px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px; }
+.eco-foot { margin-top: auto; display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.eco-status { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+.eco-go { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ember-300); }
+.eco-card.is-link:hover .eco-go { color: var(--ember-200); }
+@media (max-width: 880px) { .eco-grid { grid-template-columns: 1fr; } .eco-title { font-size: 36px; } }
+@media (max-width: 560px) { .eco { padding: 44px 0 64px; } .eco-title { font-size: 30px; } .eco-lead { font-size: 16px; } }
