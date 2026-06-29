@@ -51,7 +51,7 @@ export default function Nav({ lang }: { lang: string }) {
           <div className={`nav-links${open ? ' open' : ''}`}>
             <a href={`/${lang}#manifest`} onClick={close}>{t('nav.manifest')}</a>
             <a href={`/${lang}#services`} onClick={close}>{t('nav.services')}</a>
-            <Link href={`/${lang}/ekosystem`} onClick={close}>{t('nav.ecosystem')}</Link>
+            <a href={`/${lang}#ekosystem`} onClick={close}>{t('nav.ecosystem')}</a>
             <a href={`/${lang}#contact`} onClick={close}>{t('nav.contact')}</a>
             <Link href={`/${lang}/o-mnie`} onClick={close}>{t('nav.about')}</Link>
             <a className="btn btn-ghost" href={`/${lang}#contact`} onClick={close}>

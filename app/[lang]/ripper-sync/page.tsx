@@ -391,7 +391,7 @@ export default async function RipperSyncPage({
             </div>
           </div>
           <div className="phero-art">
-            <iframe src={`/bio-scan-3d.html?lang=${lang}`} title="RipperSync — bio-scan 3D" loading="lazy" />
+            <iframe src={`/bio-scan-3d.html?lang=${lang}&embed=1`} title="RipperSync — bio-scan 3D" loading="lazy" />
           </div>
         </section>
       </div>

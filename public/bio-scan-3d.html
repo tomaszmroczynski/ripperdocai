@@ -123,6 +123,8 @@
     .syncBtn{font-size:11px;padding:11px 18px}
     .help{font-size:9px;padding:0 10px;bottom:10px}
   }
+  /* embed mode (used inside the website): show only the clean figure */
+  body.embed .hud, body.embed #bs-top, body.embed .dock, body.embed .help, body.embed .panel { display: none !important; }
 </style>
 </head>
 <body>
@@ -213,6 +215,7 @@ window.HUMAN_HEIGHT=1.70;
     };
     var valid=['no','en','pl'];
     var urlLang=new URLSearchParams(location.search).get('lang');
+    if(new URLSearchParams(location.search).get('embed')) document.body.classList.add('embed');
     window.RD_LANG = valid.indexOf(urlLang)>=0 ? urlLang : 'no';
     window.bsT=function(){return window.BS_I18N[window.RD_LANG];};
     window.rdApplyLang=function(lang){
@@ -306,7 +309,6 @@ window.HUMAN_HEIGHT=1.70;
   <script type="module">
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { VRButton } from 'three/addons/webxr/VRButton.js';
 
     const EMBER=0xEA9A3E, EMBER_HEX=new THREE.Color(0xF1B86A), SPARK=new THREE.Color(0xFFD9A0);
     const PTS=window.HUMAN_POINTS;
@@ -318,9 +320,8 @@ window.HUMAN_HEIGHT=1.70;
 
     const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
     renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-    renderer.setSize(innerWidth,innerHeight); renderer.setClearColor(0x040506,1);
-    renderer.xr.enabled=true; app.appendChild(renderer.domElement);
-    document.body.appendChild(VRButton.createButton(renderer));
+    renderer.setSize(innerWidth,innerHeight); renderer.setClearColor(0x07090C,1);
+    app.appendChild(renderer.domElement);
 
     const controls=new OrbitControls(camera,renderer.domElement);
     controls.target.set(0,1.0,0); controls.enableDamping=true; controls.dampingFactor=.08;

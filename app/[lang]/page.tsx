@@ -1,5 +1,6 @@
 import { getDict, locales } from '@/lib/i18n';
 import RevolutionStatement from '@/components/RevolutionStatement';
+import EcoTabs, { type EcoItem } from '@/components/EcoTabs';
 
 const REV: Record<string, { eyebrow: string; lines: string[] }> = {
   no: {
@@ -44,39 +45,35 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-type EcoItem = { level: string; name: string; href: string };
-const ECO: Record<string, { eyebrow: string; title: string; body: string; cta: string; items: EcoItem[] }> = {
+const ECO: Record<string, { eyebrow: string; title: string; body: string; items: EcoItem[] }> = {
   no: {
     eyebrow: 'Økosystem',
     title: 'Ett system. Hele mennesket.',
     body: 'Ikke enkeltverktøy, men ett system som forsterker mennesket — kropp, tenkning og handling. Forsterkning, ikke automatisering.',
-    cta: 'Se økosystemet',
     items: [
-      { level: 'Kropp', name: 'RipperSync', href: 'ripper-sync' },
-      { level: 'Tenkning', name: 'Ripper Trinity', href: 'ripper-trinity' },
-      { level: 'Handling', name: 'Ripper Task Force', href: 'ekosystem' }
+      { level: 'Kropp', name: 'RipperSync', line: 'Signal fra enhetene dine gjort om til en trend: handlekraft, restitusjon, energi. En privat KI-coach.', status: 'Konsept under arbeid', href: 'ripper-sync', cta: 'Se RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Tenkning', name: 'Ripper Trinity', line: 'Et moderert råd: to KI-stemmer, du leder. Beslutninger med et sporbart resonnement.', status: 'Konsept under arbeid', href: 'ripper-trinity', cta: 'Se Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Handling', name: 'Ripper Task Force', line: 'En oppgavestyrke av modeller utfører oppgaver i CLI — under menneskelig moderering og kontroll. Ikke en autonom løkke.', status: 'Under arbeid', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   },
   en: {
     eyebrow: 'Ecosystem',
     title: 'One system. The whole human.',
     body: 'Not single tools, but one system that amplifies the human — body, thinking and action. Augmentation, not automation.',
-    cta: 'Explore the ecosystem',
     items: [
-      { level: 'Body', name: 'RipperSync', href: 'ripper-sync' },
-      { level: 'Thinking', name: 'Ripper Trinity', href: 'ripper-trinity' },
-      { level: 'Action', name: 'Ripper Task Force', href: 'ekosystem' }
+      { level: 'Body', name: 'RipperSync', line: 'The signal from your devices turned into a trend: readiness, recovery, energy. A private AI coach.', status: 'Concept in progress', href: 'ripper-sync', cta: 'Explore RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Thinking', name: 'Ripper Trinity', line: 'A moderated council: two AI voices, you lead. Decisions with an auditable trace of the reasoning.', status: 'Concept in progress', href: 'ripper-trinity', cta: 'Explore Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Action', name: 'Ripper Task Force', line: 'A task force of models executes tasks in the CLI — under human moderation and control. Not an autonomous loop.', status: 'In preparation', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   },
   pl: {
     eyebrow: 'Ekosystem',
     title: 'Jeden system. Cały człowiek.',
     body: 'Nie pojedyncze narzędzia, lecz jeden system, który wzmacnia człowieka — ciało, umysł i działanie. Augmentacja, nie automatyzacja.',
-    cta: 'Poznaj ekosystem',
     items: [
-      { level: 'Ciało', name: 'RipperSync', href: 'ripper-sync' },
-      { level: 'Myślenie', name: 'Ripper Trinity', href: 'ripper-trinity' },
-      { level: 'Działanie', name: 'Ripper Task Force', href: 'ekosystem' }
+      { level: 'Ciało', name: 'RipperSync', line: 'Sygnał z urządzeń zamieniony w trend: gotowość, regeneracja, energia. Prywatny AI coach.', status: 'Koncepcja w toku', href: 'ripper-sync', cta: 'Zobacz RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Myślenie', name: 'Ripper Trinity', line: 'Moderowana rada: dwa głosy AI, Ty prowadzisz. Decyzje z audytowalnym śladem rozumowania.', status: 'Koncepcja w toku', href: 'ripper-trinity', cta: 'Zobacz Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Działanie', name: 'Ripper Task Force', line: 'Grupa zadaniowa modeli realizuje zadania w CLI — pod moderacją i kontrolą człowieka. Nie autonomiczna pętla.', status: 'W przygotowaniu', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   }
 };
@@ -177,29 +174,13 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
       </section>
 
       <section className="block" id="ekosystem">
-        <div className="wrap eco-teaser">
-          <div className="eco-teaser-art">
-            <iframe src={`/brain-storm-3d.html?lang=${lang}`} title="Ripperdoc — ekosystem" loading="lazy" />
-          </div>
-          <div className="eco-teaser-copy">
-            <div className="sec-eyebrow">{eco.eyebrow}</div>
-            <h2 className="sec-title" style={{ fontSize: 40 }}>
-              {eco.title}
-            </h2>
-            <p className="sec-sub">{eco.body}</p>
-            <div className="eco-teaser-list">
-              {eco.items.map((it) => (
-                <a key={it.name} className="eco-teaser-row" href={`/${lang}/${it.href}`}>
-                  <span className="eco-teaser-level">{it.level}</span>
-                  <span className="eco-teaser-name">{it.name}</span>
-                  <span className="eco-teaser-arrow">→</span>
-                </a>
-              ))}
-            </div>
-            <p className="work-more">
-              <a href={`/${lang}/ekosystem`}>{eco.cta} →</a>
-            </p>
-          </div>
+        <div className="wrap">
+          <div className="sec-eyebrow">{eco.eyebrow}</div>
+          <h2 className="sec-title" style={{ fontSize: 40 }}>
+            {eco.title}
+          </h2>
+          <p className="sec-sub" style={{ maxWidth: 680 }}>{eco.body}</p>
+          <EcoTabs items={eco.items} lang={lang} />
         </div>
       </section>
 

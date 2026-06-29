@@ -833,3 +833,25 @@ a.scan-preview { text-decoration: none; }
 .eco-teaser-row:hover .eco-teaser-arrow { color: var(--ember-300); transform: translateX(3px); }
 @media (max-width: 880px) { .eco-teaser { grid-template-columns: 1fr; gap: 28px; } .eco-teaser-art { order: -1; } }
 @media (max-width: 560px) { .eco-teaser-level { width: 82px; font-size: 10px; } }
+
+/* ---- Ecosystem tabs (homepage) ---- */
+.ecot { margin-top: 30px; }
+.ecot-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.ecot-tab { display: flex; flex-direction: column; gap: 3px; align-items: flex-start; text-align: left; padding: 11px 16px; border: 1px solid var(--border-hairline); border-radius: var(--radius-md); background: var(--surface-card); cursor: pointer; transition: border-color var(--dur-base) var(--ease-signal), background var(--dur-base) var(--ease-signal); }
+.ecot-tab:hover { border-color: var(--border-ember); }
+.ecot-tab.on { border-color: var(--border-ember); background: radial-gradient(120% 130% at 50% 0%, rgba(234,154,62,0.10), rgba(7,9,12,0) 70%), var(--ink-900); }
+.ecot-tab-level { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ember-300); }
+.ecot-tab-name { font-size: 15px; color: var(--text-strong); }
+.ecot-panel { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 32px; align-items: center; border: 1px solid var(--border-hairline); border-radius: var(--radius-xl); overflow: hidden; background: var(--ink-1000); }
+.ecot-art { aspect-ratio: 4 / 5; background-size: cover; background-position: center top; background-color: var(--ink-1000); }
+.ecot-copy { padding: 14px 36px 14px 0; }
+.ecot-level { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ember-300); margin-bottom: 8px; }
+.ecot-name { font-size: 28px; letter-spacing: -0.02em; color: var(--text-strong); margin-bottom: 12px; }
+.ecot-line { font-size: 16px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px; max-width: 46ch; }
+.ecot-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.ecot-status { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); }
+@media (max-width: 760px) {
+  .ecot-panel { grid-template-columns: 1fr; gap: 0; }
+  .ecot-art { aspect-ratio: 16 / 10; }
+  .ecot-copy { padding: 22px; }
+}
