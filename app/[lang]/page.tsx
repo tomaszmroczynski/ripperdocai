@@ -45,34 +45,46 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-const ECO: Record<string, { eyebrow: string; title: string; body: string; items: EcoItem[] }> = {
+const ECO: Record<string, { eyebrow: string; title: string; body: string[]; items: EcoItem[] }> = {
   no: {
     eyebrow: 'Økosystem',
-    title: 'Ett system. Hele mennesket.',
-    body: 'Ikke enkeltverktøy, men ett system som forsterker mennesket — kropp, tenkning og handling. Forsterkning, ikke automatisering.',
+    title: 'Ett system. Én visjon. Mennesket i sentrum.',
+    body: [
+      'RIPPERDOC ble ikke skapt for å levere enda et frittstående AI-verktøy.',
+      'Målet vårt er ett helhetlig økosystem der kunstig intelligens støtter mennesket gjennom hele prosessen — fra å forstå problemet, via analyse og beslutninger, til å gjennomføre handlinger.',
+      'I stedet for mange isolerte løsninger bygger vi ett sammenhengende system der alle komponenter samarbeider, og mennesket forblir det sentrale elementet i hver prosess.'
+    ],
     items: [
-      { level: 'Kropp', name: 'RipperSync', line: 'Signal fra enhetene dine gjort om til en trend: handlekraft, restitusjon, energi. En privat KI-coach.', status: 'Konsept under arbeid', href: 'ripper-sync', cta: 'Se RipperSync', img: '/assets/img/ripper-sync.png' },
-      { level: 'Tenkning', name: 'Ripper Trinity', line: 'Et moderert råd: to KI-stemmer, du leder. Beslutninger med et sporbart resonnement.', status: 'Konsept under arbeid', href: 'ripper-trinity', cta: 'Se Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Kropp', name: 'RipperSync', line: 'Signal fra enhetene dine gjort om til en trend: handlekraft, restitusjon, energi. En privat KI-coach.', status: 'Testprogram i gang', href: 'ripper-sync', cta: 'Se RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Tenkning', name: 'Ripper Trinity', line: 'Et moderert råd: to KI-stemmer, du leder. Beslutninger med et sporbart resonnement.', status: 'Testprogram i gang', href: 'ripper-trinity', cta: 'Se Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
       { level: 'Handling', name: 'Ripper Task Force', line: 'En oppgavestyrke av modeller utfører oppgaver i CLI — under menneskelig moderering og kontroll. Ikke en autonom løkke.', status: 'Under arbeid', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   },
   en: {
     eyebrow: 'Ecosystem',
-    title: 'One system. The whole human.',
-    body: 'Not single tools, but one system that amplifies the human — body, thinking and action. Augmentation, not automation.',
+    title: 'One system. One vision. The human at the centre.',
+    body: [
+      'RIPPERDOC wasn’t created to ship yet another standalone AI tool.',
+      'Our goal is one comprehensive ecosystem where artificial intelligence supports the person across the whole process — from understanding the problem, through analysis and decisions, to carrying the actions out.',
+      'Instead of many isolated solutions we build one coherent system in which all components work together, and the human stays the central element of every process.'
+    ],
     items: [
-      { level: 'Body', name: 'RipperSync', line: 'The signal from your devices turned into a trend: readiness, recovery, energy. A private AI coach.', status: 'Concept in progress', href: 'ripper-sync', cta: 'Explore RipperSync', img: '/assets/img/ripper-sync.png' },
-      { level: 'Thinking', name: 'Ripper Trinity', line: 'A moderated council: two AI voices, you lead. Decisions with an auditable trace of the reasoning.', status: 'Concept in progress', href: 'ripper-trinity', cta: 'Explore Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Body', name: 'RipperSync', line: 'The signal from your devices turned into a trend: readiness, recovery, energy. A private AI coach.', status: 'Test program live', href: 'ripper-sync', cta: 'Explore RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Thinking', name: 'Ripper Trinity', line: 'A moderated council: two AI voices, you lead. Decisions with an auditable trace of the reasoning.', status: 'Test program live', href: 'ripper-trinity', cta: 'Explore Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
       { level: 'Action', name: 'Ripper Task Force', line: 'A task force of models executes tasks in the CLI — under human moderation and control. Not an autonomous loop.', status: 'In preparation', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   },
   pl: {
     eyebrow: 'Ekosystem',
-    title: 'Jeden system. Cały człowiek.',
-    body: 'Nie pojedyncze narzędzia, lecz jeden system, który wzmacnia człowieka — ciało, umysł i działanie. Augmentacja, nie automatyzacja.',
+    title: 'Jeden system. Jedna wizja. Człowiek w centrum.',
+    body: [
+      'RIPPERDOC nie powstał po to, aby dostarczać kolejne pojedyncze narzędzia AI.',
+      'Naszym celem jest stworzenie kompleksowego ekosystemu, w którym sztuczna inteligencja wspiera człowieka w całym procesie — od zrozumienia problemu, przez analizę i podejmowanie decyzji, aż po realizację działań.',
+      'Zamiast wielu odizolowanych rozwiązań budujemy jeden spójny system, w którym wszystkie komponenty współpracują ze sobą, a człowiek pozostaje centralnym elementem każdego procesu.'
+    ],
     items: [
-      { level: 'Ciało', name: 'RipperSync', line: 'Sygnał z urządzeń zamieniony w trend: gotowość, regeneracja, energia. Prywatny AI coach.', status: 'Koncepcja w toku', href: 'ripper-sync', cta: 'Zobacz RipperSync', img: '/assets/img/ripper-sync.png' },
-      { level: 'Myślenie', name: 'Ripper Trinity', line: 'Moderowana rada: dwa głosy AI, Ty prowadzisz. Decyzje z audytowalnym śladem rozumowania.', status: 'Koncepcja w toku', href: 'ripper-trinity', cta: 'Zobacz Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
+      { level: 'Ciało', name: 'RipperSync', line: 'Sygnał z urządzeń zamieniony w trend: gotowość, regeneracja, energia. Prywatny AI coach.', status: 'Program testowy uruchomiony', href: 'ripper-sync', cta: 'Zobacz RipperSync', img: '/assets/img/ripper-sync.png' },
+      { level: 'Myślenie', name: 'Ripper Trinity', line: 'Moderowana rada: dwa głosy AI, Ty prowadzisz. Decyzje z audytowalnym śladem rozumowania.', status: 'Program testowy uruchomiony', href: 'ripper-trinity', cta: 'Zobacz Ripper Trinity', img: '/assets/img/ripper-trinity.png' },
       { level: 'Działanie', name: 'Ripper Task Force', line: 'Grupa zadaniowa modeli realizuje zadania w CLI — pod moderacją i kontrolą człowieka. Nie autonomiczna pętla.', status: 'W przygotowaniu', href: '', cta: '', img: '/assets/img/ripper-task-force.png' }
     ]
   }
@@ -179,7 +191,9 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           <h2 className="sec-title" style={{ fontSize: 40 }}>
             {eco.title}
           </h2>
-          <p className="sec-sub" style={{ maxWidth: 680 }}>{eco.body}</p>
+          {eco.body.map((p, i) => (
+            <p key={i} className="sec-sub" style={{ maxWidth: 680, marginTop: i ? 12 : undefined }}>{p}</p>
+          ))}
           <EcoTabs items={eco.items} lang={lang} />
         </div>
       </section>

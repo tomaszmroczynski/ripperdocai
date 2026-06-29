@@ -23,7 +23,7 @@ type RT = {
 
 const UI: Record<string, RT> = {
   no: {
-    eyebrow: 'Konsept under arbeid — Ripper Trinity',
+    eyebrow: 'Testprogram i gang — Ripper Trinity',
     title: 'Forsterket tenkning.',
     intro: [
       'Ripper Trinity er et rom for vanskelige beslutninger. Du sitter med to KI-stemmer — én tenker strukturelt, den andre kritisk — og du leder samtalen.',
@@ -45,7 +45,7 @@ const UI: Record<string, RT> = {
     ctaSync: 'Se RipperSync'
   },
   en: {
-    eyebrow: 'Concept in progress — Ripper Trinity',
+    eyebrow: 'Test program live — Ripper Trinity',
     title: 'Amplified thinking.',
     intro: [
       'Ripper Trinity is a space for hard decisions. You sit with two AI voices — one thinks structurally, the other critically — and you lead the conversation.',
@@ -67,7 +67,7 @@ const UI: Record<string, RT> = {
     ctaSync: 'Explore RipperSync'
   },
   pl: {
-    eyebrow: 'Koncepcja w toku — Ripper Trinity',
+    eyebrow: 'Program testowy uruchomiony — Ripper Trinity',
     title: 'Wzmocnienie myślenia.',
     intro: [
       'Ripper Trinity to przestrzeń do trudnych decyzji. Siadasz z dwoma głosami AI — jeden myśli strukturalnie, drugi krytycznie — a Ty prowadzisz rozmowę.',

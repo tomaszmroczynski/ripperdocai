@@ -31,8 +31,8 @@ const UI: Record<string, Eco> = {
       'På hvert nivå er prinsippet det samme — teknologien gir råd og utfører, men beslutningen, kontrollen og forfatterskapet blir hos mennesket. Forsterkning, ikke automatisering.'
     ],
     cards: [
-      { level: 'Kropp', name: 'RipperSync', line: 'Signal fra enhetene dine gjort om til en trend: handlekraft, restitusjon, energi. En privat KI-coach.', status: 'Konsept under arbeid', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Se RipperSync' },
-      { level: 'Tenkning', name: 'Ripper Trinity', line: 'Et moderert råd: to KI-stemmer, du leder. Beslutninger med et sporbart resonnement.', status: 'Konsept under arbeid', icon: 'brain', href: 'ripper-trinity', cta: 'Se Ripper Trinity' },
+      { level: 'Kropp', name: 'RipperSync', line: 'Signal fra enhetene dine gjort om til en trend: handlekraft, restitusjon, energi. En privat KI-coach.', status: 'Testprogram i gang', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Se RipperSync' },
+      { level: 'Tenkning', name: 'Ripper Trinity', line: 'Et moderert råd: to KI-stemmer, du leder. Beslutninger med et sporbart resonnement.', status: 'Testprogram i gang', icon: 'brain', href: 'ripper-trinity', cta: 'Se Ripper Trinity' },
       { level: 'Handling', name: 'Ripper Task Force', line: 'En oppgavestyrke av modeller utfører oppgaver i CLI — under menneskelig moderering og kontroll. Ikke en autonom løkke.', status: 'Under arbeid', icon: 'terminal' }
     ]
   },
@@ -44,8 +44,8 @@ const UI: Record<string, Eco> = {
       'At each level the principle is the same — technology advises and executes, but the decision, the control and the authorship stay with the person. Augmentation, not automation.'
     ],
     cards: [
-      { level: 'Body', name: 'RipperSync', line: 'The signal from your devices turned into a trend: readiness, recovery, energy. A private AI coach.', status: 'Concept in progress', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Explore RipperSync' },
-      { level: 'Thinking', name: 'Ripper Trinity', line: 'A moderated council: two AI voices, you lead. Decisions with an auditable trace of the reasoning.', status: 'Concept in progress', icon: 'brain', href: 'ripper-trinity', cta: 'Explore Ripper Trinity' },
+      { level: 'Body', name: 'RipperSync', line: 'The signal from your devices turned into a trend: readiness, recovery, energy. A private AI coach.', status: 'Test program live', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Explore RipperSync' },
+      { level: 'Thinking', name: 'Ripper Trinity', line: 'A moderated council: two AI voices, you lead. Decisions with an auditable trace of the reasoning.', status: 'Test program live', icon: 'brain', href: 'ripper-trinity', cta: 'Explore Ripper Trinity' },
       { level: 'Action', name: 'Ripper Task Force', line: 'A task force of models executes tasks in the CLI — under human moderation and control. Not an autonomous loop.', status: 'In preparation', icon: 'terminal' }
     ]
   },
@@ -57,8 +57,8 @@ const UI: Record<string, Eco> = {
       'Na każdym z nich zasada jest ta sama — technologia doradza i wykonuje, ale decyzja, kontrola i autorstwo zostają przy człowieku. Augmentacja, nie automatyzacja.'
     ],
     cards: [
-      { level: 'Ciało', name: 'RipperSync', line: 'Sygnał z urządzeń zamieniony w trend: gotowość, regeneracja, energia. Prywatny AI coach.', status: 'Koncepcja w toku', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Zobacz RipperSync' },
-      { level: 'Myślenie', name: 'Ripper Trinity', line: 'Moderowana rada: dwa głosy AI, Ty prowadzisz. Decyzje z audytowalnym śladem rozumowania.', status: 'Koncepcja w toku', icon: 'brain', href: 'ripper-trinity', cta: 'Zobacz Ripper Trinity' },
+      { level: 'Ciało', name: 'RipperSync', line: 'Sygnał z urządzeń zamieniony w trend: gotowość, regeneracja, energia. Prywatny AI coach.', status: 'Program testowy uruchomiony', icon: 'heart-pulse', href: 'ripper-sync', cta: 'Zobacz RipperSync' },
+      { level: 'Myślenie', name: 'Ripper Trinity', line: 'Moderowana rada: dwa głosy AI, Ty prowadzisz. Decyzje z audytowalnym śladem rozumowania.', status: 'Program testowy uruchomiony', icon: 'brain', href: 'ripper-trinity', cta: 'Zobacz Ripper Trinity' },
       { level: 'Działanie', name: 'Ripper Task Force', line: 'Grupa zadaniowa modeli realizuje zadania w CLI — pod moderacją i kontrolą człowieka. Nie autonomiczna pętla.', status: 'W przygotowaniu', icon: 'terminal' }
     ]
   }

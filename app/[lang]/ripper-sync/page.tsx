@@ -26,7 +26,7 @@ const INTEGR = ['Meta Quest 3', 'Apple Watch', 'Garmin', 'Polar', 'Whoop', 'Oura
 
 const UI: Record<string, RS> = {
   no: {
-    eyebrow: 'Konsept under arbeid — RipperSync',
+    eyebrow: 'Testprogram i gang — RipperSync',
     title: 'Du kan ikke forsterke sinnet mens du ignorerer kroppen.',
     lede: 'Trening påvirker sirkulasjon, konsentrasjon, søvn og evnen til å lære. Det er et signal om hvordan du fungerer, restituerer og gjenvinner handlekraft.',
     whatH: 'Hva det er',
@@ -46,7 +46,7 @@ const UI: Record<string, RS> = {
     ctaTrinity: 'Se Ripper Trinity'
   },
   en: {
-    eyebrow: 'Concept in progress — RipperSync',
+    eyebrow: 'Test program live — RipperSync',
     title: 'You can’t amplify the mind while ignoring the body.',
     lede: 'Training affects circulation, focus, sleep and the ability to learn. It’s a signal of how you perform, recover and regain readiness.',
     whatH: 'What it is',
@@ -66,7 +66,7 @@ const UI: Record<string, RS> = {
     ctaTrinity: 'Explore Ripper Trinity'
   },
   pl: {
-    eyebrow: 'Koncepcja w toku — RipperSync',
+    eyebrow: 'Program testowy uruchomiony — RipperSync',
     title: 'Nie da się wzmacniać umysłu, ignorując ciało.',
     lede: 'Trening wpływa na krążenie, koncentrację, sen i zdolność uczenia się. To sygnał o tym, jak działasz, regenerujesz się i odzyskujesz gotowość.',
     whatH: 'Czym jest',
