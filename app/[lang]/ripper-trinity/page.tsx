@@ -90,6 +90,16 @@ const UI: Record<string, RT> = {
   }
 };
 
+function HeroTitle({ text }: { text: string }) {
+  const parts = text.trim().split(' ');
+  const last = parts.length > 1 ? parts.pop() : '';
+  return (
+    <h1 className="phero-title">
+      {parts.join(' ')} {last && <span className="amp">{last}</span>}
+    </h1>
+  );
+}
+
 export async function generateMetadata({
   params
 }: {
@@ -118,30 +128,34 @@ export default async function RipperTrinityPage({
 }) {
   const { lang } = await params;
   const u = UI[lang] ?? UI.en;
+  const ecoLabel = ({ no: 'Økosystem', en: 'Ecosystem', pl: 'Ekosystem' } as Record<string, string>)[lang] ?? 'Ecosystem';
   return (
     <main className="rs-page">
-      <div className="wrap rs-wrap">
+      <div className="wrap">
         <Link className="rs-back" href={`/${lang}`}>
           ← Ripperdoc
         </Link>
-        <div className="sec-eyebrow">{u.eyebrow}</div>
-        <h1 className="rs-title">{u.title}</h1>
-
-        {u.intro.map((p, i) => (
-          <p key={i} className={i === 0 ? 'rs-lede' : 'rs-lead'}>
-            {p}
-          </p>
-        ))}
-
-        <div className="viz-block">
-          <p className="rs-figcap">{u.vizCap}</p>
-          <div className="viz-embed">
-            <iframe src={`/brain-storm-3d.html?lang=${lang}`} title="Ripper Trinity — brainstorm" loading="lazy" />
+        <section className="phero">
+          <div className="phero-copy">
+            <div className="sec-eyebrow">{u.eyebrow}</div>
+            <HeroTitle text={u.title} />
+            <p className="phero-sub">{u.intro[0]}</p>
+            <div className="phero-lockup">Human First · Intelligence Amplified</div>
+            <div className="phero-cta">
+              <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
+              <Link className="btn btn-ghost" href={`/${lang}/ripper-sync`}>{u.ctaSync}</Link>
+            </div>
           </div>
-          <a className="viz-fs" href={`/brain-storm-3d.html?lang=${lang}`} target="_blank" rel="noopener">
-            ↗ {u.vizCap}
-          </a>
-        </div>
+          <div className="phero-art">
+            <iframe src={`/brain-storm-3d.html?lang=${lang}`} title="Ripper Trinity" loading="lazy" />
+          </div>
+        </section>
+      </div>
+
+      <div className="wrap rs-wrap">
+        {u.intro.slice(1).map((p, i) => (
+          <p key={i} className="rs-lead">{p}</p>
+        ))}
 
         <section className="rs-section">
           <h2 className="rs-h2">{u.stepsH}</h2>
@@ -166,12 +180,7 @@ export default async function RipperTrinityPage({
         </section>
 
         <div className="rs-cta">
-          <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>
-            {u.ctaDiag}
-          </Link>
-          <Link className="btn btn-ghost" href={`/${lang}/ripper-sync`}>
-            {u.ctaSync}
-          </Link>
+          <Link className="btn btn-ghost" href={`/${lang}/ekosystem`}>{ecoLabel}</Link>
         </div>
       </div>
     </main>

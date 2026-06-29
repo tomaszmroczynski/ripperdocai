@@ -805,3 +805,16 @@ a.scan-preview { text-decoration: none; }
 .eco-card.is-link:hover .eco-go { color: var(--ember-200); }
 @media (max-width: 880px) { .eco-grid { grid-template-columns: 1fr; } .eco-title { font-size: 36px; } }
 @media (max-width: 560px) { .eco { padding: 44px 0 64px; } .eco-title { font-size: 30px; } .eco-lead { font-size: 16px; } }
+
+/* ---- Product hero (split: copy + live 3D), convention of ripper-trinity-hero ---- */
+.phero { position: relative; display: grid; grid-template-columns: 1.02fr 0.98fr; align-items: center; gap: 40px; padding: 28px 0 26px; }
+.phero::before { content: ""; position: absolute; inset: -10% -8% 0 22%; background: radial-gradient(circle at 78% 42%, rgba(234,154,62,0.12), rgba(234,154,62,0) 60%); pointer-events: none; z-index: 0; }
+.phero-copy { position: relative; z-index: 2; max-width: 560px; }
+.phero-title { font-size: clamp(32px, 4.6vw, 56px); line-height: 1.04; letter-spacing: -0.03em; color: var(--paper-50); margin: 14px 0 0; }
+.phero-title .amp { background: var(--grad-ember); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.phero-sub { font-size: 18px; line-height: 1.6; color: var(--mist-100); margin-top: 20px; max-width: 48ch; }
+.phero-lockup { font-family: var(--font-display); font-weight: 300; letter-spacing: 0.26em; text-transform: uppercase; font-size: 12px; color: var(--mist-300); margin-top: 18px; }
+.phero-cta { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+.phero-art { position: relative; z-index: 1; }
+.phero-art iframe { display: block; width: 100%; height: min(70vh, 560px); min-height: 420px; border: 0; background: transparent; }
+@media (max-width: 900px) { .phero { grid-template-columns: 1fr; padding: 16px 0 18px; gap: 20px; } .phero-art { order: -1; } .phero-art iframe { height: 52vh; min-height: 340px; } }

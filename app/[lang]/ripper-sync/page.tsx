@@ -327,6 +327,16 @@ function SectionFig({ viz, i }: { viz: Viz; i: number }) {
   );
 }
 
+function HeroTitle({ text }: { text: string }) {
+  const parts = text.trim().split(' ');
+  const last = parts.length > 1 ? parts.pop() : '';
+  return (
+    <h1 className="phero-title">
+      {parts.join(' ')} {last && <span className="amp">{last}</span>}
+    </h1>
+  );
+}
+
 export async function generateMetadata({
   params
 }: {
@@ -362,30 +372,34 @@ export default async function RipperSyncPage({
   const { lang } = await params;
   const u = UI[lang] ?? UI.en;
   const v = VIZ_RS[lang] ?? VIZ_RS.en;
+  const ecoLabel = ({ no: 'Økosystem', en: 'Ecosystem', pl: 'Ekosystem' } as Record<string, string>)[lang] ?? 'Ecosystem';
   return (
     <main className="rs-page">
-      <div className="wrap rs-wrap">
+      <div className="wrap">
         <Link className="rs-back" href={`/${lang}`}>
           ← Ripperdoc
         </Link>
-        <div className="sec-eyebrow">{u.eyebrow}</div>
-        <h1 className="rs-title">{u.title}</h1>
-
-        {u.intro.map((p, i) => (
-          <p key={i} className={i === 0 ? 'rs-lede' : 'rs-lead'}>
-            {p}
-          </p>
-        ))}
-
-        <div className="viz-block">
-          <p className="rs-figcap">{v.cap}</p>
-          <div className="viz-embed">
+        <section className="phero">
+          <div className="phero-copy">
+            <div className="sec-eyebrow">{u.eyebrow}</div>
+            <HeroTitle text={u.title} />
+            <p className="phero-sub">{u.intro[0]}</p>
+            <div className="phero-lockup">Human First · Intelligence Amplified</div>
+            <div className="phero-cta">
+              <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
+              <Link className="btn btn-ghost" href={`/${lang}/ekosystem`}>{ecoLabel}</Link>
+            </div>
+          </div>
+          <div className="phero-art">
             <iframe src={`/bio-scan-3d.html?lang=${lang}`} title="RipperSync — bio-scan 3D" loading="lazy" />
           </div>
-          <a className="viz-fs" href={`/bio-scan-3d.html?lang=${lang}`} target="_blank" rel="noopener">
-            ↗ {v.fs}
-          </a>
-        </div>
+        </section>
+      </div>
+
+      <div className="wrap rs-wrap">
+        {u.intro.slice(1).map((p, i) => (
+          <p key={i} className="rs-lead">{p}</p>
+        ))}
 
         <FlowStrip flow={u.viz.flow} />
 
