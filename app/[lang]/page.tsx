@@ -44,74 +44,49 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-const scanSvg = `
-<svg class="scan-svg" viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-  <defs>
-    <linearGradient id="scanline" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#EA9A3E" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#FFD9A0" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#EA9A3E" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <ellipse cx="160" cy="128" rx="98" ry="112" fill="none" stroke="rgba(234,154,62,0.25)" stroke-width="1"/>
-  <ellipse cx="160" cy="128" rx="84" ry="98" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-  <g stroke="rgba(234,154,62,0.32)" stroke-width="1.1" fill="none">
-    <path d="M160,46 L160,92 L160,140"/>
-    <path d="M160,66 L132,78 M160,66 L188,78"/>
-    <path d="M132,78 L120,112 L112,146 M188,78 L200,112 L208,146"/>
-    <path d="M160,140 L146,142 L140,180 L136,214 M160,140 L174,142 L180,180 L184,214"/>
-  </g>
-  <g class="scan-nodes" fill="#F1B86A">
-    <circle cx="160" cy="46" r="3.4"/><circle cx="160" cy="66" r="2.4"/><circle cx="132" cy="78" r="2.4"/>
-    <circle cx="188" cy="78" r="2.4"/><circle cx="120" cy="112" r="2.4"/><circle cx="200" cy="112" r="2.4"/>
-    <circle cx="112" cy="146" r="2.4"/><circle cx="208" cy="146" r="2.4"/><circle cx="160" cy="92" r="2.8"/>
-    <circle cx="160" cy="140" r="2.8"/><circle cx="140" cy="180" r="2.4"/><circle cx="180" cy="180" r="2.4"/>
-    <circle cx="136" cy="214" r="2.4"/><circle cx="184" cy="214" r="2.4"/>
-  </g>
-  <circle class="spark-node" cx="160" cy="92" r="5" fill="#FFD9A0"/>
-  <rect class="scan-sweep" x="48" y="20" width="224" height="22" fill="url(#scanline)"/>
-</svg>`;
-
-const trinitySvg = `
-<svg class="scan-svg" viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-  <defs>
-    <radialGradient id="tcore" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFD9A0" stop-opacity="0.95"/>
-      <stop offset="45%" stop-color="#EA9A3E" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#EA9A3E" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <g stroke="rgba(234,154,62,0.28)" stroke-width="1" fill="none">
-    <circle cx="78" cy="125" r="46" stroke="rgba(255,255,255,0.06)"/>
-    <path d="M54 100 L96 116 M54 150 L92 134 M70 92 L86 162 M48 125 L112 125"/>
-  </g>
-  <g fill="#F1B86A">
-    <circle cx="54" cy="100" r="2.6"/><circle cx="96" cy="116" r="3.2"/><circle cx="54" cy="150" r="2.6"/>
-    <circle cx="92" cy="134" r="2.6"/><circle cx="70" cy="92" r="2.2"/><circle cx="86" cy="162" r="2.2"/><circle cx="112" cy="125" r="3.6" fill="#FFD9A0"/>
-  </g>
-  <g stroke="rgba(234,154,62,0.28)" stroke-width="1" fill="none">
-    <circle cx="242" cy="125" r="46" stroke="rgba(255,255,255,0.06)"/>
-    <path d="M266 100 L224 116 M266 150 L228 134 M250 92 L234 162 M272 125 L208 125"/>
-  </g>
-  <g fill="#F1B86A">
-    <circle cx="266" cy="100" r="2.6"/><circle cx="224" cy="116" r="3.2"/><circle cx="266" cy="150" r="2.6"/>
-    <circle cx="228" cy="134" r="2.6"/><circle cx="250" cy="92" r="2.2"/><circle cx="234" cy="162" r="2.2"/><circle cx="208" cy="125" r="3.6" fill="#FFD9A0"/>
-  </g>
-  <g fill="none" stroke-linecap="round">
-    <path d="M112 125 C150 80 170 80 208 125" stroke="#EA9A3E" stroke-width="2"/>
-    <path d="M112 125 C150 170 170 170 208 125" stroke="#DD7E27" stroke-width="2" opacity="0.85"/>
-    <path d="M138 96 l10 -9 l-4 12 l12 -5" stroke="#FFD9A0" stroke-width="1.3" opacity="0.85"/>
-    <path d="M182 156 l10 9 l-4 -12 l12 5" stroke="#FFD9A0" stroke-width="1.3" opacity="0.7"/>
-  </g>
-  <circle class="spark-node" cx="160" cy="125" r="34" fill="url(#tcore)"/>
-  <circle cx="160" cy="125" r="8" fill="#FFF3DF"/>
-</svg>`;
+type EcoItem = { level: string; name: string; href: string };
+const ECO: Record<string, { eyebrow: string; title: string; body: string; cta: string; items: EcoItem[] }> = {
+  no: {
+    eyebrow: 'Økosystem',
+    title: 'Ett system. Hele mennesket.',
+    body: 'Ikke enkeltverktøy, men ett system som forsterker mennesket — kropp, tenkning og handling. Forsterkning, ikke automatisering.',
+    cta: 'Se økosystemet',
+    items: [
+      { level: 'Kropp', name: 'RipperSync', href: 'ripper-sync' },
+      { level: 'Tenkning', name: 'Ripper Trinity', href: 'ripper-trinity' },
+      { level: 'Handling', name: 'Ripper Task Force', href: 'ekosystem' }
+    ]
+  },
+  en: {
+    eyebrow: 'Ecosystem',
+    title: 'One system. The whole human.',
+    body: 'Not single tools, but one system that amplifies the human — body, thinking and action. Augmentation, not automation.',
+    cta: 'Explore the ecosystem',
+    items: [
+      { level: 'Body', name: 'RipperSync', href: 'ripper-sync' },
+      { level: 'Thinking', name: 'Ripper Trinity', href: 'ripper-trinity' },
+      { level: 'Action', name: 'Ripper Task Force', href: 'ekosystem' }
+    ]
+  },
+  pl: {
+    eyebrow: 'Ekosystem',
+    title: 'Jeden system. Cały człowiek.',
+    body: 'Nie pojedyncze narzędzia, lecz jeden system, który wzmacnia człowieka — ciało, umysł i działanie. Augmentacja, nie automatyzacja.',
+    cta: 'Poznaj ekosystem',
+    items: [
+      { level: 'Ciało', name: 'RipperSync', href: 'ripper-sync' },
+      { level: 'Myślenie', name: 'Ripper Trinity', href: 'ripper-trinity' },
+      { level: 'Działanie', name: 'Ripper Task Force', href: 'ekosystem' }
+    ]
+  }
+};
 
 export default async function Page({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   const d = getDict(lang);
   const t = (k: string) => d[k] ?? '';
   const html = (k: string) => ({ __html: d[k] ?? '' });
+  const eco = ECO[lang] ?? ECO.en;
 
   return (
     <>
@@ -201,70 +176,28 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
-      <section className="block" id="work">
-        <div className="wrap atlas">
-          <a
-            className="atlas-panel scan-preview"
-            id="scan-link"
-            href={`/bio-scan-3d.html?lang=${lang}`}
-            target="_blank"
-            rel="noopener"
-          >
-            <div className="badge">RipperSync · Bio-Scan 3D</div>
-            <div dangerouslySetInnerHTML={{ __html: scanSvg }} />
-            <div className="scan-cta">
-              <i data-lucide="scan-eye" /> <span>{t('work.launch')}</span>
-            </div>
-          </a>
-          <div>
-            <div className="sec-eyebrow">{t('work.eyebrow')}</div>
-            <h2 className="sec-title" style={{ fontSize: 40 }}>
-              {t('work.title')}
-            </h2>
-            {t('work.body').split('\n\n').map((p, i) => (
-              <p key={i} className="sec-sub" style={i ? { marginTop: 14 } : undefined}>
-                {p}
-              </p>
-            ))}
-            <div className="chips">
-              <span className="chip">
-                <i data-lucide="scan-eye" /> <span>{t('work.chip1')}</span>
-              </span>
-              <span className="chip">
-                <i data-lucide="activity" /> <span>{t('work.chip2')}</span>
-              </span>
-              <span className="chip">
-                <i data-lucide="brain" /> <span>{t('work.chip3')}</span>
-              </span>
-              <span className="chip">
-                <i data-lucide="cpu" /> <span>{t('work.chip4')}</span>
-              </span>
-            </div>
-            <div className="work-meta">{t('work.stack')}</div>
-            <p className="work-more">
-              <a href={`/${lang}/ripper-sync`}>{t('work.more')} →</a>
-            </p>
+      <section className="block" id="ekosystem">
+        <div className="wrap eco-teaser">
+          <div className="eco-teaser-art">
+            <iframe src={`/brain-storm-3d.html?lang=${lang}`} title="Ripperdoc — ekosystem" loading="lazy" />
           </div>
-        </div>
-      </section>
-
-      <section className="block" id="trinity">
-        <div className="wrap atlas">
-          <a className="atlas-panel scan-preview" href={`/${lang}/ripper-trinity`}>
-            <div className="badge">Ripper Trinity</div>
-            <div dangerouslySetInnerHTML={{ __html: trinitySvg }} />
-            <div className="scan-cta">
-              <i data-lucide="brain" /> <span>{t('trinity.launch')}</span>
-            </div>
-          </a>
-          <div>
-            <div className="sec-eyebrow">{t('trinity.eyebrow')}</div>
+          <div className="eco-teaser-copy">
+            <div className="sec-eyebrow">{eco.eyebrow}</div>
             <h2 className="sec-title" style={{ fontSize: 40 }}>
-              {t('trinity.title')}
+              {eco.title}
             </h2>
-            <p className="sec-sub">{t('trinity.body')}</p>
+            <p className="sec-sub">{eco.body}</p>
+            <div className="eco-teaser-list">
+              {eco.items.map((it) => (
+                <a key={it.name} className="eco-teaser-row" href={`/${lang}/${it.href}`}>
+                  <span className="eco-teaser-level">{it.level}</span>
+                  <span className="eco-teaser-name">{it.name}</span>
+                  <span className="eco-teaser-arrow">→</span>
+                </a>
+              ))}
+            </div>
             <p className="work-more">
-              <a href={`/${lang}/ripper-trinity`}>{t('work.more')} →</a>
+              <a href={`/${lang}/ekosystem`}>{eco.cta} →</a>
             </p>
           </div>
         </div>

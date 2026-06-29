@@ -818,3 +818,18 @@ a.scan-preview { text-decoration: none; }
 .phero-art { position: relative; z-index: 1; }
 .phero-art iframe { display: block; width: 100%; height: min(70vh, 560px); min-height: 420px; border: 0; background: transparent; }
 @media (max-width: 900px) { .phero { grid-template-columns: 1fr; padding: 16px 0 18px; gap: 20px; } .phero-art { order: -1; } .phero-art iframe { height: 52vh; min-height: 340px; } }
+
+/* ---- Ecosystem teaser on the landing (consolidated products) ---- */
+.eco-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+.eco-teaser-art { position: relative; border-radius: var(--radius-2xl); overflow: hidden; background: var(--ink-1000); border: 1px solid var(--border-hairline); }
+.eco-teaser-art iframe { display: block; width: 100%; height: min(56vh, 460px); min-height: 360px; border: 0; background: transparent; }
+.eco-teaser-list { display: flex; flex-direction: column; gap: 0; margin: 22px 0 6px; }
+.eco-teaser-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border-hairline); text-decoration: none; }
+.eco-teaser-row:last-child { border-bottom: 0; }
+.eco-teaser-level { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ember-300); width: 100px; flex: none; }
+.eco-teaser-name { font-size: 16px; color: var(--text-strong); flex: 1; transition: color var(--dur-base) var(--ease-signal); }
+.eco-teaser-arrow { color: var(--text-faint); transition: transform var(--dur-base) var(--ease-signal), color var(--dur-base) var(--ease-signal); }
+.eco-teaser-row:hover .eco-teaser-name { color: var(--ember-200); }
+.eco-teaser-row:hover .eco-teaser-arrow { color: var(--ember-300); transform: translateX(3px); }
+@media (max-width: 880px) { .eco-teaser { grid-template-columns: 1fr; gap: 28px; } .eco-teaser-art { order: -1; } }
+@media (max-width: 560px) { .eco-teaser-level { width: 82px; font-size: 10px; } }
