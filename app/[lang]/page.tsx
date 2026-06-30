@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getDict, locales } from '@/lib/i18n';
 import RevolutionStatement from '@/components/RevolutionStatement';
 import { type EcoItem } from '@/components/EcoTabs';
