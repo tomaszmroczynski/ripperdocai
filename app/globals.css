@@ -823,6 +823,18 @@ a.scan-preview { text-decoration: none; }
 .bg-field { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.5; pointer-events: none; }
 .rs-page > .wrap, .eco > .wrap, .dos > .wrap, .diag-page > .wrap { position: relative; z-index: 1; }
 
+/* ---- Ecosystem products stacked (one under another, label only separates) ---- */
+.eco-stack { display: flex; flex-direction: column; margin-top: 30px; }
+.eco-item { padding: 34px 0; border-top: 1px solid var(--border-hairline); }
+.eco-item:first-child { border-top: 0; padding-top: 8px; }
+.eco-item-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+.eco-item-name { font-size: 24px; letter-spacing: -0.02em; color: var(--text-strong); }
+.eco-item-body { display: grid; grid-template-columns: 0.78fr 1.22fr; gap: 32px; align-items: center; }
+.eco-item:nth-child(even) .eco-item-art { order: 2; }
+.eco-item-art { aspect-ratio: 4 / 5; background-size: cover; background-position: center top; border-radius: var(--radius-xl); border: 1px solid var(--border-hairline); background-color: var(--ink-1000); }
+.eco-item-copy .eco-line { font-size: 16px; line-height: 1.65; color: var(--text-muted); margin-bottom: 18px; max-width: 52ch; }
+@media (max-width: 760px) { .eco-item-body { grid-template-columns: 1fr; gap: 16px; } .eco-item:nth-child(even) .eco-item-art { order: 0; } }
+
 /* ---- Ecosystem teaser on the landing (consolidated products) ---- */
 .eco-teaser { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
 .eco-teaser-art { position: relative; border-radius: var(--radius-2xl); overflow: hidden; background: var(--ink-1000); border: 1px solid var(--border-hairline); }

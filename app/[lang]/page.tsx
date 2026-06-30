@@ -1,6 +1,6 @@
 import { getDict, locales } from '@/lib/i18n';
 import RevolutionStatement from '@/components/RevolutionStatement';
-import EcoTabs, { type EcoItem } from '@/components/EcoTabs';
+import { type EcoItem } from '@/components/EcoTabs';
 
 const REV: Record<string, { eyebrow: string; lines: string[] }> = {
   no: {
@@ -194,7 +194,28 @@ export default async function Page({ params }: { params: Promise<{ lang: string 
           {eco.body.map((p, i) => (
             <p key={i} className="sec-sub" style={{ maxWidth: 680, marginTop: i ? 12 : undefined }}>{p}</p>
           ))}
-          <EcoTabs items={eco.items} lang={lang} />
+          <div className="eco-stack">
+            {eco.items.map((it) => (
+              <article key={it.name} className="eco-item">
+                <div className="eco-item-head">
+                  <span className="eco-level">{it.level}</span>
+                  <span className="eco-item-name">{it.name}</span>
+                </div>
+                <div className="eco-item-body">
+                  <div className="eco-item-art" style={{ backgroundImage: `url(${it.img})` }} aria-hidden="true" />
+                  <div className="eco-item-copy">
+                    <p className="eco-line">{it.line}</p>
+                    <div className="eco-foot">
+                      <span className="eco-status">{it.status}</span>
+                      {it.href && it.cta && (
+                        <Link className="btn btn-ghost" href={`/${lang}/${it.href}`}>{it.cta} →</Link>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
