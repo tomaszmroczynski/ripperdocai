@@ -131,6 +131,7 @@ export default async function RipperTrinityPage({
   const ecoLabel = ({ no: 'Økosystem', en: 'Ecosystem', pl: 'Ekosystem' } as Record<string, string>)[lang] ?? 'Ecosystem';
   return (
     <main className="rs-page">
+      <canvas data-neural-field data-sparks="2" data-density="0.00006" data-speed="0.1" className="bg-field" />
       <div className="wrap">
         <Link className="rs-back" href={`/${lang}`}>
           ← Ripperdoc

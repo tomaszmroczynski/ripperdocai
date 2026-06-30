@@ -232,6 +232,7 @@ export default async function AboutPage({
 
   return (
     <main className="dos">
+      <canvas data-neural-field data-sparks="2" data-density="0.00006" data-speed="0.1" className="bg-field" />
       <div className="wrap dos-wrap">
         <Link className="dos-back" href={`/${lang}`}>
           {u.back}

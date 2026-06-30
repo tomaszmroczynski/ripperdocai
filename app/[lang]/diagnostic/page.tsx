@@ -105,6 +105,7 @@ export default async function DiagnosticPage({
   const u = UI[lang] ?? UI.en;
   return (
     <main className="diag-page">
+      <canvas data-neural-field data-sparks="2" data-density="0.00006" data-speed="0.1" className="bg-field" />
       <div className="wrap diag-wrap">
         <Link className="diag-back" href={`/${lang}`}>
           ← Ripperdoc
