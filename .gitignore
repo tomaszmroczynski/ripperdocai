@@ -19,3 +19,6 @@ next-env.d.ts
 # design-system reference (not part of the deployed app)
 Ripperdoc Design System/
 mock/
+
+.vercel
+.env*
