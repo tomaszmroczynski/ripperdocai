@@ -9,6 +9,7 @@ import {
 import { sendTesterAccessEmail } from '@/lib/tester-mail';
 import {
   findTester,
+  mutateTesters,
   updateTester,
   upsertTester,
   type TesterRecord
@@ -32,6 +33,7 @@ export async function issueAccessLink({
   const normalized = normalizeEmail(email);
   const admin = isAdminEmail(normalized);
   let record = await findTester(normalized);
+  const previousLastEmailSentAt = record?.lastEmailSentAt;
 
   if (!record && !admin && !createIfMissing) return { sent: false };
 
@@ -54,15 +56,26 @@ export async function issueAccessLink({
   if (next.status === 'suspended') return { sent: false, record: next };
 
   record = await upsertTester(next);
-  const verifyUrl = new URL('/api/tester-auth/verify', origin);
+  const publicOrigin = (process.env.PUBLIC_APP_URL || origin).replace(/\/$/, '');
+  const verifyUrl = new URL('/api/tester-auth/verify', publicOrigin);
   verifyUrl.searchParams.set('token', token);
   verifyUrl.searchParams.set('lang', lang);
 
-  await sendTesterAccessEmail({
-    to: normalized,
-    verifyUrl: verifyUrl.toString(),
-    lang
-  });
+  try {
+    await sendTesterAccessEmail({
+      to: normalized,
+      verifyUrl: verifyUrl.toString(),
+      lang
+    });
+  } catch (error) {
+    await updateTester(normalized, (current) => ({
+      ...current,
+      lastEmailSentAt: previousLastEmailSentAt,
+      magicTokenHash: undefined,
+      magicTokenExpiresAt: undefined
+    }));
+    throw error;
+  }
 
   return { sent: true, record };
 }
@@ -72,32 +85,28 @@ export async function consumeAccessToken(
 ): Promise<TesterRecord | null> {
   const hash = hashMagicToken(token);
   const now = Date.now();
-  let matched: TesterRecord | undefined;
+  let consumed: TesterRecord | null = null;
 
-  const candidates = [adminEmail()];
-  const admin = await findTester(adminEmail());
-  if (admin) candidates[0] = admin.email;
+  await mutateTesters((records) => {
+    const index = records.findIndex(
+      (record) =>
+        record.magicTokenHash === hash &&
+        record.magicTokenExpiresAt &&
+        new Date(record.magicTokenExpiresAt).getTime() > now &&
+        record.status !== 'suspended'
+    );
+    if (index < 0) return;
 
-  // The store is intentionally small during the test program.
-  const { listTesters } = await import('@/lib/tester-store');
-  const records = await listTesters();
-  matched = records.find(
-    (record) =>
-      record.magicTokenHash === hash &&
-      record.magicTokenExpiresAt &&
-      new Date(record.magicTokenExpiresAt).getTime() > now &&
-      record.status !== 'suspended'
-  );
+    consumed = {
+      ...records[index],
+      status: 'active',
+      verifiedAt: records[index].verifiedAt || new Date().toISOString(),
+      lastLoginAt: new Date().toISOString(),
+      magicTokenHash: undefined,
+      magicTokenExpiresAt: undefined
+    };
+    records[index] = consumed;
+  });
 
-  if (!matched) return null;
-
-  return updateTester(matched.email, (record) => ({
-    ...record,
-    status: 'active',
-    verifiedAt: record.verifiedAt || new Date().toISOString(),
-    lastLoginAt: new Date().toISOString(),
-    magicTokenHash: undefined,
-    magicTokenExpiresAt: undefined
-  }));
+  return consumed;
 }
-

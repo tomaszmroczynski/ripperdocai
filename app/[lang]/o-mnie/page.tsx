@@ -55,9 +55,9 @@ const UI: Record<string, Dossier> = {
     lead: 'Wchodzę w technologię nie z dyplomu, lecz z potrzeby zbudowania czegoś od nowa — łącząc dwie dekady praktyki przy sieciach, systemach i wdrożeniach z tym, co buduję dziś: AI, automatyzacją i systemami self-hosted.',
     turnH: 'Punkt zwrotny',
     turn: [
-      'Przez dwie dekady pracowałem na styku technologii i ludzi: sieci komputerowe, systemy bezpieczeństwa, wdrożenia, wsparcie techniczne. W 2025 zacząłem pracę jako kierowca ciężarówki i kończyłem kurs kategorii C.',
-      'Miesiąc później poważny wypadek przy pracy zatrzymał tę ścieżkę. Zamiast się zatrzymać, potraktowałem to jako moment zmiany.',
-      'Technologia i rozwiązywanie problemów ciągnęły mnie od dawna — ukończyłem bootcamp backend .NET w Noroff. Dziś wracam do tego świadomie: buduję projekty, automatyzacje i systemy oparte na AI, eksperymentuję z self-hosted, Dockerem i integracjami API. Uczę się przez działanie.'
+      'Przez blisko dwie dekady pracowałem w rolach technicznych — sieci komputerowe, systemy bezpieczeństwa, wdrożenia i wsparcie techniczne. Przez te wszystkie lata, a zwłaszcza po osiedleniu się w Norwegii, programowanie, automatyzacja i AI nigdy nie były moim stanowiskiem pracy, ale zawsze były moją pasją. Po godzinach nieustannie się uczyłem, budowałem własne projekty i eksperymentowałem z backendem, self-hostingiem i integracjami API — to równoległa ścieżka, która rosła wraz z moim życiem zawodowym.',
+      'W 2025 zacząłem pracę jako kierowca ciężarówki, kończąc kurs kategorii C. Miesiąc później poważny wypadek przy pracy zakończył tę drogę. Zamiast traktować to jak porażkę, uczyniłem z tego punkt zwrotny — moment, by świadomie zamienić wieloletnią pasję w kierunek zawodowy.',
+      'To nie jest skok w nieznane — to kontynuacja zainteresowania, które rozwijam od lat. Ukończyłem bootcamp backend .NET w Noroff, a dziś buduję projekty, automatyzacje i systemy oparte na AI oraz pracuję bezpośrednio z infrastrukturą self-hosted, Dockerem i integracjami API. Uczę się przez budowanie — i teraz robię to świadomie, jako ścieżkę zawodową.'
     ],
     expH: 'Doświadczenie',
     exp: [
@@ -105,9 +105,9 @@ const UI: Record<string, Dossier> = {
     lead: 'I am moving into technology not from a diploma but from the need to build something anew — combining two decades of hands-on work with networks, systems and deployments with what I build today: AI, automation and self-hosted systems.',
     turnH: 'The turning point',
     turn: [
-      'For two decades I worked at the meeting point of technology and people: computer networks, security systems, deployments, technical support. In 2025 I started work as a truck driver and was finishing my category C licence.',
-      'A month later a serious workplace accident halted that path. Instead of freezing, I treated it as a moment of change.',
-      'Technology and problem-solving had always pulled at me — I completed the backend .NET bootcamp at Noroff. Today I am returning to it consciously: I build projects, automations and AI-based systems, and experiment with self-hosted infrastructure, Docker and API integrations. I learn by doing.'
+      'For nearly two decades I worked in technical roles — computer networks, security systems, deployments and technical support. Throughout those years, and especially after settling in Norway, software development, automation and AI were never my job title, but they were always my passion. Outside of work I kept learning, building my own projects and experimenting with backend development, self-hosting and API integrations — a parallel track that grew steadily alongside my professional life.',
+      'In 2025 I began working as a truck driver while completing my Category C licence. A month later a serious workplace accident brought that path to an end. Rather than treating it as a setback, I let it become a turning point — the moment to consciously turn a long-held passion into my professional direction.',
+      'This isn’t a leap into the unknown; it’s the continuation of an interest I’ve been developing for years. I completed Noroff’s backend .NET bootcamp, and today I build projects, automations and AI-based systems and work hands-on with self-hosted infrastructure, Docker and API integrations. I learn by building — and now I’m doing it on purpose, as a career.'
     ],
     expH: 'Experience',
     exp: [
@@ -155,9 +155,9 @@ const UI: Record<string, Dossier> = {
     lead: 'Jeg går inn i teknologien ikke fra et diplom, men fra behovet for å bygge noe på nytt — og kombinerer to tiår med praktisk arbeid med nettverk, systemer og implementeringer med det jeg bygger i dag: AI, automatisering og self-hosted systemer.',
     turnH: 'Vendepunktet',
     turn: [
-      'I to tiår jobbet jeg i møtet mellom teknologi og mennesker: datanettverk, sikkerhetssystemer, implementeringer, teknisk støtte. I 2025 startet jeg som lastebilsjåfør og fullførte førerkort klasse C.',
-      'En måned senere stoppet en alvorlig arbeidsulykke den veien. I stedet for å stå stille, tok jeg det som et tidspunkt for endring.',
-      'Teknologi og problemløsning har alltid trukket i meg — jeg fullførte backend .NET-bootcampen hos Noroff. I dag vender jeg tilbake til det bevisst: jeg bygger prosjekter, automatiseringer og AI-baserte systemer, og eksperimenterer med self-hosted infrastruktur, Docker og API-integrasjoner. Jeg lærer gjennom å gjøre.'
+      'I nesten to tiår jobbet jeg i tekniske roller — datanettverk, sikkerhetssystemer, implementeringer og teknisk støtte. Gjennom alle disse årene, og særlig etter at jeg slo meg ned i Norge, var programmering, automatisering og AI aldri jobbtittelen min, men alltid lidenskapen min. På fritiden fortsatte jeg å lære, bygde egne prosjekter og eksperimenterte med backend-utvikling, self-hosting og API-integrasjoner — et parallelt spor som vokste jevnt ved siden av yrkeslivet mitt.',
+      'I 2025 begynte jeg som lastebilsjåfør mens jeg fullførte førerkort klasse C. En måned senere satte en alvorlig arbeidsulykke en stopper for den veien. I stedet for å se det som et tilbakeslag, gjorde jeg det til et vendepunkt — øyeblikket for bevisst å gjøre en mangeårig lidenskap til min yrkesretning.',
+      'Dette er ikke et sprang ut i det ukjente — det er en fortsettelse av en interesse jeg har utviklet i årevis. Jeg fullførte backend .NET-bootcampen hos Noroff, og i dag bygger jeg prosjekter, automatiseringer og AI-baserte systemer og jobber praktisk med self-hosted infrastruktur, Docker og API-integrasjoner. Jeg lærer ved å bygge — og nå gjør jeg det bevisst, som en karriere.'
     ],
     expH: 'Erfaring',
     exp: [

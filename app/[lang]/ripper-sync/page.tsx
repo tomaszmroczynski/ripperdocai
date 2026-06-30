@@ -18,6 +18,7 @@ type RS = {
   coach: string;
   techH: string;
   tech: string;
+  ctaTest: string;
   ctaDiag: string;
   ctaTrinity: string;
 };
@@ -42,6 +43,7 @@ const UI: Record<string, RS> = {
     coach: 'Du snakker med coachen om uken, en plan eller et fall i energi. Den husker historikken, oppdager mønstre og viser raske bevis på fremgang — motivasjon bygd på fakta, ikke på disiplin alene.',
     techH: 'Det tekniske laget',
     tech: 'Helsedata er sensitive, derfor kjører RipperSync på privat infrastruktur — på din egen maskinvare, en server eller en dedikert enhet. Uten å flyttes til andres sky.',
+    ctaTest: 'Åpne testprogrammet',
     ctaDiag: 'Se hva som bør forsterkes',
     ctaTrinity: 'Se Ripper Trinity'
   },
@@ -62,6 +64,7 @@ const UI: Record<string, RS> = {
     coach: 'You talk to the coach about the week, a plan or a drop in energy. It remembers your history, spots patterns and surfaces quick evidence of progress — motivation built on facts, not on discipline alone.',
     techH: 'The technical layer',
     tech: 'Health data is sensitive, so RipperSync runs on private infrastructure — on your own hardware, a server or a dedicated device. Without moving it to someone else’s cloud.',
+    ctaTest: 'Open the test program',
     ctaDiag: 'See what to amplify',
     ctaTrinity: 'Explore Ripper Trinity'
   },
@@ -82,6 +85,7 @@ const UI: Record<string, RS> = {
     coach: 'Z coachem rozmawiasz o tygodniu, planie albo spadku energii. Pamięta historię, wykrywa wzorce i pokazuje szybkie dowody postępu — motywacja oparta na faktach, nie na samej dyscyplinie.',
     techH: 'Warstwa techniczna',
     tech: 'Dane zdrowotne są wrażliwe, dlatego RipperSync działa w prywatnej infrastrukturze — na twoim sprzęcie, serwerze albo dedykowanym urządzeniu. Bez przenoszenia do cudzej chmury.',
+    ctaTest: 'Wejdź do programu testowego',
     ctaDiag: 'Sprawdź, co warto wzmocnić',
     ctaTrinity: 'Zobacz Ripper Trinity'
   }
@@ -135,7 +139,8 @@ export default async function RipperSyncPage({
             <p className="phero-sub">{u.lede}</p>
             <div className="phero-lockup">Human First · Intelligence Amplified</div>
             <div className="phero-cta">
-              <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
+              <Link className="btn btn-primary" href={`/${lang}/testers`}>{u.ctaTest}</Link>
+              <Link className="btn btn-ghost" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
               <Link className="btn btn-ghost" href={`/${lang}/ripper-trinity`}>{u.ctaTrinity}</Link>
             </div>
           </div>
@@ -176,7 +181,8 @@ export default async function RipperSyncPage({
         </section>
 
         <div className="rs-cta">
-          <Link className="btn btn-primary" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
+          <Link className="btn btn-primary" href={`/${lang}/testers`}>{u.ctaTest}</Link>
+          <Link className="btn btn-ghost" href={`/${lang}/diagnostic`}>{u.ctaDiag}</Link>
           <Link className="btn btn-ghost" href={`/${lang}/ripper-trinity`}>{u.ctaTrinity}</Link>
         </div>
       </div>
